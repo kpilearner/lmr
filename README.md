@@ -35,7 +35,7 @@ This repository will contain the official implementation of _ICEdit_.
 <div align="left">
 
 # News 
-- **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week!
+- **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day！
 
 
 
