@@ -39,7 +39,7 @@ This repository will contain the official implementation of _ICEdit_.
 - [ ] Inference-time Scaling with VLM
 - [x] Pretrained Weights
 - [ ] More Inference Demos
-- [ ] IC-Edit GUI
+- [x] Gradio demo
 - [ ] Comfy UI demo
 - [ ] Training Code
 
