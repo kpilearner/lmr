@@ -42,7 +42,7 @@ This repository will contain the official implementation of _ICEdit_.
 - [ ] Training Code
 
 # News 
-- **[2025/4/30]** 🔥 We release the [pretrained weights](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main) on Huggingface 🤗!
+- **[2025/4/30]** 🔥 We release the inference code and [pretrained weights](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main) on Huggingface 🤗!
 - **[2025/4/30]** 🔥 We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv!
 - **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day!
 
@@ -68,7 +68,7 @@ If you can connect to Huggingface, you don't need to download the weights. Other
 
 Now you can have a try!
 
-> Our model can **only edit images with a width of $512$ pixels** (there is no restriction on the height). If you pass in an image with a width other than $512$ pixels, the model will automatically resize it to $512$ pixels.
+> Our model can **only edit images with a width of 512 pixels** (there is no restriction on the height). If you pass in an image with a width other than 512 pixels, the model will automatically resize it to 512 pixels.
 
 ```bash
 python scripts/inference.py --image assets/girl.png \
@@ -76,7 +76,7 @@ python scripts/inference.py --image assets/girl.png \
                             --seed 42 \
 ```
 
-Editing a $512×768$ image requires $35$ GB of GPU memory. If you need to run on a system with $24$ GB of GPU memory (for example, an NVIDIA RTX3090), you can add the `--enable-model-cpu-offload` parameter.
+Editing a 512×768 image requires 35 GB of GPU memory. If you need to run on a system with 24 GB of GPU memory (for example, an NVIDIA RTX3090), you can add the `--enable-model-cpu-offload` parameter.
 
 ```bash
 python scripts/inference.py --image assets/girl.png \
