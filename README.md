@@ -43,7 +43,7 @@ This repository will contain the official implementation of _ICEdit_.
 <div align="center">
 <div style="width: 80%; text-align: left; margin:auto;">
     <img style="width:100%" src="docs/images/gpt4o_comparison.png">
-    <p style="text-align: left;">Compared with commercial models such as Gemini and GPT-4O, our methods are comparable to and even superior to these commercial models in terms of character ID preservation and instruction following. <b>We are more open-source than them, with lower costs, faster speed (it takes about 9 seconds to process one image), and powerful performance</b>.</p>
+    <p style="text-align: left;">Compared with commercial models such as Gemini and GPT-4o, our methods are comparable to and even superior to these commercial models in terms of character ID preservation and instruction following. <b>We are more open-source than them, with lower costs, faster speed (it takes about 9 seconds to process one image), and powerful performance</b>.</p>
 </div>
 
 
