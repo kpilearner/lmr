@@ -17,6 +17,8 @@
 </div>
 <div>
     <a href="https://arxiv.org/abs/2504.20690" target="_blank">Arxiv</a>&emsp;
+    <a href="https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main" target="_blank">Huggingface 🤗</a>&emsp;
+    <a href="https://huggingface.co/spaces/RiverZ/ICEdit" target="_blank">Huggingface Demo 🤗</a>&emsp;
     <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">Project Page</a>
 </div>
 
@@ -56,6 +58,7 @@ The current model is the one used in the experiments in the paper, trained with 
 - [ ] Training Code
 
 # 🎆 News 
+- **[2025/4/30]** 🔥 We release the [Huggingface Demo](https://huggingface.co/spaces/RiverZ/ICEdit) 🤗! Have a try!
 - **[2025/4/30]** 🔥 We release the inference code and [pretrained weights](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main) on Huggingface 🤗!
 - **[2025/4/30]** 🔥 We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv!
 - **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day!
