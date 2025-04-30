@@ -1,9 +1,11 @@
 accelerate
 diffusers==0.32.0
+gradio
 numpy
 peft
 protobuf
 sentencepiece
+spaces
 torch==2.6.0
 torchvision
 transformers==4.51.3
