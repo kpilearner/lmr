@@ -39,12 +39,12 @@ image = image.convert("RGB")
 
 if image.size[0] != 512:
     print("\033[93m[WARNING] We can only deal with the case where the image's width is 512.\033[0m")
-    print("\033[93m[WARNING] Resizing the image to width 512...\033[0m")
     new_width = 512
     scale = new_width / image.size[0]
     new_height = int(image.size[1] * scale)
     new_height = (new_height // 8) * 8  
-    image = image.resize((new_width, new_height), Image.ANTIALIAS)
+    image = image.resize((new_width, new_height))
+    print(f"\033[93m[WARNING] Resizing the image to {new_width} x {new_height}\033[0m")
 
 instruction = args.instruction
 

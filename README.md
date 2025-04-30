@@ -35,7 +35,7 @@ This repository will contain the official implementation of _ICEdit_.
 # To Do List
 
 - [x] Inference Code
-- [ ] Inference Scaling with VLM
+- [ ] Inference-time Scaling with VLM
 - [x] Pretrained Weights
 - [ ] More Inference Demos
 - [ ] IC-Edit GUI
@@ -64,11 +64,13 @@ If you can connect to Huggingface, you don't need to download the weights. Other
 - [Flux.1-fill-dev](https://huggingface.co/black-forest-labs/flux.1-fill-dev).
 - [ICEdit-MoE-LoRA](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA).
 
-## Inference in bash (w/o VLM Inference Scaling)
+## Inference in bash (w/o VLM Inference-time Scaling)
 
 Now you can have a try!
 
 > Our model can **only edit images with a width of 512 pixels** (there is no restriction on the height). If you pass in an image with a width other than 512 pixels, the model will automatically resize it to 512 pixels.
+
+> If you found the model failed to generate the expected results, please try to change the `--seed` parameter. Inference-time Scaling with VLM can help much to improve the results.
 
 ```bash
 python scripts/inference.py --image assets/girl.png \
@@ -95,7 +97,7 @@ python scripts/inference.py --image assets/girl.png \
 
 ### 🎨 Enjoy your editing! 
 
-## Inference in bash (w/ VLM Inference Scaling)
+## Inference in bash (w/ VLM Inference-time Scaling)
 
 TODO.
 
