@@ -32,18 +32,72 @@ This repository will contain the official implementation of _ICEdit_.
 
 <div align="left">
 
-## To Do List
+# To Do List
 
-- [ ] Inference Code
-- [ ] Inference Demos
-- [ ] pretrained weights
+- [x] Inference Code
+- [ ] Inference Scaling with VLM
+- [x] Pretrained Weights
+- [ ] More Inference Demos
 - [ ] IC-Edit GUI
 - [ ] Training Code
 
 # News 
-- **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day！
-- **[2025/4/30]** We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv！
+- **[2025/4/30]** 🔥 We release the [pretrained weights](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main) on Huggingface 🤗!
+- **[2025/4/30]** 🔥 We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv!
+- **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day!
 
+
+# Installation
+
+## Conda environment setup
+
+```bash
+conda create -n icedit python=3.10
+conda activate icedit
+pip install -r requirements.txt
+```
+
+## Download pretrained weights
+
+If you can connect to Huggingface, you don't need to download the weights. Otherwise, you need to download the weights to local.
+
+- [Flux.1-fill-dev](https://huggingface.co/black-forest-labs/flux.1-fill-dev).
+- [ICEdit-MoE-LoRA](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA).
+
+## Inference in bash (w/o VLM Inference Scaling)
+
+Now you can have a try!
+
+> Our model can **only edit images with a width of $512$ pixels** (there is no restriction on the height). If you pass in an image with a width other than $512$ pixels, the model will automatically resize it to $512$ pixels.
+
+```bash
+python scripts/inference.py --image assets/girl.png \
+                            --instruction "Make her hair dark green and her clothes checked." \
+                            --seed 42 \
+```
+
+Editing a $512×768$ image requires $35$ GB of GPU memory. If you need to run on a system with $24$ GB of GPU memory (for example, an NVIDIA RTX3090), you can add the `--enable-model-cpu-offload` parameter.
+
+```bash
+python scripts/inference.py --image assets/girl.png \
+                            --instruction "Make her hair dark green and her clothes checked." \
+                            --enable-model-cpu-offload
+```
+
+If you have downloaded the pretrained weights locally, please pass the parameters during inference, as in: 
+
+```bash
+python scripts/inference.py --image assets/girl.png \
+                            --instruction "Make her hair dark green and her clothes checked." \
+                            --flux-path /path/to/flux.1-fill-dev \
+                            --lora-path /path/to/ICEdit-MoE-LoRA
+```
+
+### 🎨 Enjoy your editing! 
+
+## Inference in bash (w/ VLM Inference Scaling)
+
+TODO.
 
 # Comparison with Commercial Models
 
@@ -55,6 +109,7 @@ This repository will contain the official implementation of _ICEdit_.
 
 
 <div align="left">
+
 
 # Bibtex
 If this work is helpful for your research, please consider citing the following BibTeX entry.
