@@ -39,6 +39,7 @@ This repository will contain the official implementation of _ICEdit_.
 - [x] Pretrained Weights
 - [ ] More Inference Demos
 - [ ] IC-Edit GUI
+- [ ] Comfy UI demo
 - [ ] Training Code
 
 # News 
@@ -97,9 +98,7 @@ python scripts/inference.py --image assets/girl.png \
 
 ### 🎨 Enjoy your editing! 
 
-## Inference in bash (w/ VLM Inference-time Scaling)
 
-TODO.
 
 # Comparison with Commercial Models
 
