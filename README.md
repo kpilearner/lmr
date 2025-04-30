@@ -37,7 +37,7 @@ This repository will contain the official implementation of _ICEdit_.
 
 ### If you encounter such a failure case, please **try again with a different seed**!
 
-- Our base model—FLUX—does not inherently support a wide range of styles, so a large portion of our dataset involves style transfer. As a result, the model **may sometimes inexplicably change your artistic style**.
+- Our base model, FLUX, does not inherently support a wide range of styles, so a large portion of our dataset involves style transfer. As a result, the model **may sometimes inexplicably change your artistic style**.
 
 - Our training dataset is **mostly targeted at realistic images**. For non-realistic images, such as **anime** or **blurry pictures**, the success rate of the editing **drop and could potentially affect the final image quality**.
 
