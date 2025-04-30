@@ -30,8 +30,15 @@
 This repository will contain the official implementation of _ICEdit_.
 
 
-
 <div align="left">
+
+## To Do List
+
+- [ ] Inference Code
+- [ ] Inference Demos
+- [ ] pretrained weights
+- [ ] IC-Edit GUI
+- [ ] Training Code
 
 # News 
 - **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day！
@@ -53,10 +60,13 @@ This repository will contain the official implementation of _ICEdit_.
 If this work is helpful for your research, please consider citing the following BibTeX entry.
 
 ```
-@article{zhang2025ICEdit,
-  title={In-Context Edit: Enabling Instructional Image Editing with In-Context Generation in Large Scale Diffusion Transformer},
-  author={Zhang, Zechuan and Xie, Ji and Lu, Yu and Yang, Zongxin and Yang, Yi},
-  journal={arXiv},
-  year={2025}
+@misc{zhang2025ICEdit,
+      title={In-Context Edit: Enabling Instructional Image Editing with In-Context Generation in Large Scale Diffusion Transformer}, 
+      author={Zechuan Zhang and Ji Xie and Yu Lu and Zongxin Yang and Yi Yang},
+      year={2025},
+      eprint={2504.20690},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2504.20690}, 
 }
 ```
