@@ -33,6 +33,16 @@ This repository will contain the official implementation of _ICEdit_.
 
 <div align="left">
 
+# ⚠️ Tips
+
+### If you encounter such a failure case, please **try again with a different seed**!
+
+- Our base model—FLUX—does not inherently support a wide range of styles, so a large portion of our dataset involves style transfer. As a result, the model **may sometimes inexplicably change your artistic style**.
+
+- Our training dataset is **mostly targeted at realistic images**. For non-realistic images, such as **anime** or **blurry pictures**, the success rate of the editing **drop and could potentially affect the final image quality**.
+
+- While the success rates for adding objects, modifying color attributes, applying style transfer, and changing backgrounds are high, the success rate for object removal is relatively lower due to the low quality of the omniedit removal dataset.
+
 # To Do List
 
 - [x] Inference Code
@@ -43,13 +53,13 @@ This repository will contain the official implementation of _ICEdit_.
 - [ ] Comfy UI demo
 - [ ] Training Code
 
-# News 
+# 🎆 News 
 - **[2025/4/30]** 🔥 We release the inference code and [pretrained weights](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main) on Huggingface 🤗!
 - **[2025/4/30]** 🔥 We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv!
 - **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day!
 
 
-# Installation
+# 💼 Installation
 
 ## Conda environment setup
 
