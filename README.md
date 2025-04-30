@@ -16,7 +16,8 @@
      <sup>✉</sup>Corresponding Author
 </div>
 <div>
-    <a href="https://arxiv.org/abs/2504.20690" target="_blank">Arxiv 2025</a>
+    <a href="https://arxiv.org/abs/2504.20690" target="_blank">Arxiv</a>&emsp;
+    <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">Project Page</a>
 </div>
 
 
