@@ -97,6 +97,25 @@ python scripts/inference.py --image assets/girl.png \
                             --lora-path /path/to/ICEdit-MoE-LoRA
 ```
 
+## Inference in Gradio Demo
+
+We provide a gradio demo for you to edit images in a more user-friendly way. You can run the following command to start the demo.
+
+```bash
+python scripts/gradio_demo.py --port 7860
+```
+
+Like the inference script, if you want to run the demo on a system with 24 GB of GPU memory, you can add the `--enable-model-cpu-offload` parameter. And if you have downloaded the pretrained weights locally, please pass the parameters during inference, as in:
+
+```bash
+python scripts/gradio_demo.py --port 7860 \
+                              --flux-path /path/to/flux.1-fill-dev (optional) \
+                              --lora-path /path/to/ICEdit-MoE-LoRA (optional) \
+                              --enable-model-cpu-offload (optional) \
+```
+
+Then you can open the link in your browser to edit images.
+
 ### 🎨 Enjoy your editing! 
 
 
