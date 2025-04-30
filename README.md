@@ -1,4 +1,3 @@
-
 <div align="center">
 
 <h1>In-Context Edit: Enabling Instructional Image Editing with In-Context Generation in Large Scale Diffusion Transformer</h1>
@@ -21,9 +20,9 @@
 </div>
 
 
-<div style="width: 80%; text-align: left; margin:auto;">
-    <img style="width:100%" src="docs/images/teaser.png">
-    <p>We present In-Context Edit, a novel approach that achieves state-of-the-art instruction-based editing <b>using just 0.5% of the training data and 1% of the parameters required by prior SOTA methods</b>. The first row illustrates a series of multi-turn edits, executed with high precision, while the second and third rows highlight diverse, visually impressive single-turn editing results from our method.</p>
+<div style="width: 80%; margin:auto;">
+    <img style="width:100%; display: block; margin: auto;" src="docs/images/teaser.png">
+    <p style="text-align: left;">We present In-Context Edit, a novel approach that achieves state-of-the-art instruction-based editing <b>using just 0.5% of the training data and 1% of the parameters required by prior SOTA methods</b>. The first row illustrates a series of multi-turn edits, executed with high precision, while the second and third rows highlight diverse, visually impressive single-turn editing results from our method.</p>
 </div>
 
 :open_book: For more visual results, go checkout our <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">project page</a>
@@ -42,9 +41,9 @@ This repository will contain the official implementation of _ICEdit_.
 # Comparison with Commercial Models
 
 <div align="center">
-<div style="width: 80%; text-align: left; margin:auto;">
+<div style="width: 80%; text-align: center; margin:auto;">
     <img style="width:100%" src="docs/images/gpt4o_comparison.png">
-    <p>Compared with commercial models such as Gemini and GPT-4O, our methods are comparable to and even superior to these commercial models in terms of character ID preservation and instruction following. <b>We are more open-source than them, with lower costs, faster speed (it takes about 9 seconds to process one image), and powerful performance</b>.</p>
+    <p style="text-align: left;">Compared with commercial models such as Gemini and GPT-4O, our methods are comparable to and even superior to these commercial models in terms of character ID preservation and instruction following. <b>We are more open-source than them, with lower costs, faster speed (it takes about 9 seconds to process one image), and powerful performance</b>.</p>
 </div>
 
 
