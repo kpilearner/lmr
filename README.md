@@ -57,6 +57,7 @@ This repository will contain the official implementation of _ICEdit_.
 conda create -n icedit python=3.10
 conda activate icedit
 pip install -r requirements.txt
+pip install -U huggingface_hub
 ```
 
 ## Download pretrained weights
