@@ -136,9 +136,10 @@ Then you can open the link in your browser to edit images.
 
 ## ComfyUI Workflow
 
-We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1) to effortlessly run our model within ComfyUI.
+We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1) to effortlessly run our model within ComfyUI. 
 
-A more detailed introduction is on the way.
+It appears that certain issues may arise during the usage process. However, our internally developed ComfyUI workflow is set to be released imminently, which will effectively resolve these problems.
+
 
 ### 🎨 Enjoy your editing! 
 
