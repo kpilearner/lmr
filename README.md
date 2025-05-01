@@ -17,7 +17,8 @@
 </div>
 <div>
     <a href="https://arxiv.org/abs/2504.20690" target="_blank">Arxiv</a>&emsp;
-    <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">Project Page</a>
+    <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">Project Page</a>&emsp;
+    <a href="https://huggingface.co/spaces/RiverZ/ICEdit" target="_blank">Huggingface Demo</a>
 </div>
 
 
