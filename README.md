@@ -54,7 +54,7 @@ The current model is the one used in the experiments in the paper, trained with 
 - [x] Pretrained Weights
 - [ ] More Inference Demos
 - [x] Gradio demo
-- [ ] Comfy UI demo
+- [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1))
 - [ ] Training Code
 
 # 🎆 News 
@@ -131,6 +131,14 @@ python scripts/gradio_demo.py --port 7860 \
 ```
 
 Then you can open the link in your browser to edit images.
+
+
+
+## ComfyUI Workflow
+
+We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1) to effortlessly run our model within ComfyUI.
+
+A more detailed introduction is on the way.
 
 ### 🎨 Enjoy your editing! 
 
