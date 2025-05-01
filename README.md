@@ -17,8 +17,9 @@
 </div>
 <div>
     <a href="https://arxiv.org/abs/2504.20690" target="_blank">Arxiv</a>&emsp;
-    <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">Project Page</a>&emsp;
-    <a href="https://huggingface.co/spaces/RiverZ/ICEdit" target="_blank">Huggingface Demo</a>
+    <a href="https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main" target="_blank">Huggingface 🤗</a>&emsp;
+    <a href="https://huggingface.co/spaces/RiverZ/ICEdit" target="_blank">Huggingface Demo 🤗</a>&emsp;
+    <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">Project Page</a>
 </div>
 
 
@@ -34,6 +35,18 @@ This repository will contain the official implementation of _ICEdit_.
 
 <div align="left">
 
+# ⚠️ Tips
+
+### If you encounter such a failure case, please **try again with a different seed**!
+
+- Our base model, FLUX, does not inherently support a wide range of styles, so a large portion of our dataset involves style transfer. As a result, the model **may sometimes inexplicably change your artistic style**.
+
+- Our training dataset is **mostly targeted at realistic images**. For non-realistic images, such as **anime** or **blurry pictures**, the success rate of the editing **drop and could potentially affect the final image quality**.
+
+- While the success rates for adding objects, modifying color attributes, applying style transfer, and changing backgrounds are high, the success rate for object removal is relatively lower due to the low quality of the OmniEdit removal dataset.
+
+The current model is the one used in the experiments in the paper, trained with only 4 A800 GPUs (total `batch_size` = 2 x 2 x 4 = 16). In the future, we will enhance the dataset, and do scale-up, finally release a more powerful model.
+
 # To Do List
 
 - [x] Inference Code
@@ -44,13 +57,14 @@ This repository will contain the official implementation of _ICEdit_.
 - [ ] Comfy UI demo
 - [ ] Training Code
 
-# News 
+# 🎆 News 
+- **[2025/4/30]** 🔥 We release the [Huggingface Demo](https://huggingface.co/spaces/RiverZ/ICEdit) 🤗! Have a try!
 - **[2025/4/30]** 🔥 We release the inference code and [pretrained weights](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main) on Huggingface 🤗!
 - **[2025/4/30]** 🔥 We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv!
 - **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day!
 
 
-# Installation
+# 💼 Installation
 
 ## Conda environment setup
 
@@ -58,6 +72,7 @@ This repository will contain the official implementation of _ICEdit_.
 conda create -n icedit python=3.10
 conda activate icedit
 pip install -r requirements.txt
+pip install -U huggingface_hub
 ```
 
 ## Download pretrained weights

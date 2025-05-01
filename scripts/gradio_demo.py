@@ -39,40 +39,6 @@ if args.enable_model_cpu_offload:
 else:
     pipe = pipe.to("cuda")
 
-def calculate_optimal_dimensions(image: Image.Image):
-    # Extract the original dimensions
-    original_width, original_height = image.size
-    MIN_ASPECT_RATIO = 9 / 16
-    MAX_ASPECT_RATIO = 16 / 9
-    FIXED_DIMENSION = 1024
-
-    original_aspect_ratio = original_width / original_height
-
-    # Determine which dimension to fix
-    if original_aspect_ratio > 1:  # Wider than tall
-        width = FIXED_DIMENSION
-        height = round(FIXED_DIMENSION / original_aspect_ratio)
-    else:  # Taller than wide
-        height = FIXED_DIMENSION
-        width = round(FIXED_DIMENSION * original_aspect_ratio)
-
-    # Ensure dimensions are multiples of 8
-    width = (width // 8) * 8
-    height = (height // 8) * 8
-
-    # Enforce aspect ratio limits
-    calculated_aspect_ratio = width / height
-    if calculated_aspect_ratio > MAX_ASPECT_RATIO:
-        width = (height * MAX_ASPECT_RATIO // 8) * 8
-    elif calculated_aspect_ratio < MIN_ASPECT_RATIO:
-        height = (width / MIN_ASPECT_RATIO // 8) * 8
-
-    # Ensure width and height remain above the minimum dimensions
-    width = max(width, 576) if width == FIXED_DIMENSION else width
-    height = max(height, 576) if height == FIXED_DIMENSION else height
-
-    return width, height
-
 @spaces.GPU
 def infer(edit_images, 
           prompt, 
@@ -86,6 +52,16 @@ def infer(edit_images,
 ):
     
     image = edit_images["background"]
+        
+    if image.size[0] != 512:
+        print("\033[93m[WARNING] We can only deal with the case where the image's width is 512.\033[0m")
+        new_width = 512
+        scale = new_width / image.size[0]
+        new_height = int(image.size[1] * scale)
+        new_height = (new_height // 8) * 8  
+        image = image.resize((new_width, new_height))
+        print(f"\033[93m[WARNING] Resizing the image to {new_width} x {new_height}\033[0m")
+        
     image = image.convert("RGB")
     width, height = image.size
     image = image.resize((512, int(512 * height / width)))
