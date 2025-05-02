@@ -132,7 +132,11 @@ python scripts/gradio_demo.py --port 7860 \
 
 Then you can open the link in your browser to edit images.
 
-
+<div align="center">
+<div style="width: 80%; text-align: left; margin:auto;">
+    <img style="width:100%" src="docs/images/gradio.png">
+    <p style="text-align: left;">Gradio Demo: just input the instruction and wait for the result!</b>.</p>
+</div>
 
 ## ComfyUI Workflow
 
