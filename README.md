@@ -138,6 +138,9 @@ Then you can open the link in your browser to edit images.
     <p style="text-align: left;">Gradio Demo: just input the instruction and wait for the result!</b>.</p>
 </div>
 
+<div align="left">
+
+
 ## ComfyUI Workflow
 
 We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1) to effortlessly run our model within ComfyUI. 
