@@ -54,7 +54,8 @@ The current model is the one used in the experiments in the paper, trained with 
 - [x] Pretrained Weights
 - [ ] More Inference Demos
 - [x] Gradio demo
-- [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1))
+- [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and redux)
+- [ ] Comfy UI demo official
 - [ ] Training Code
 
 # 🎆 News 
@@ -143,10 +144,15 @@ Then you can open the link in your browser to edit images.
 
 ## ComfyUI Workflow
 
+### An averaged moe-lora ckpt compatible with ComfyUI-nunchaku
+
 We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1) to effortlessly run our model within ComfyUI. 
 
-It appears that certain issues may arise during the usage process. However, our internally developed ComfyUI workflow is set to be released imminently, which will effectively resolve these problems.
+The checkpoint utilized in this workflow differs slightly from the one described in the original paper. Please redownload it from [here](https://huggingface.co/aha2023/average_MOE_ICEdit-MoE-LoRA).  This workflow incorporates high-definition refinement, yielding remarkably good results. Moreover, integrating this LoRA with Redux enables outfit changes to a certain degree. Once again, a huge thank you to @[judian17](https://github.com/judian17) for his innovative contributions! For more details about the workflow, please refer to this [issue](https://github.com/River-Zhang/ICEdit/issues/1).
 
+![comfyui image](https://private-user-images.githubusercontent.com/51412948/439836361-9e941e6d-42e2-4181-8f3d-48bb54b4976b.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDYxNzkyNjEsIm5iZiI6MTc0NjE3ODk2MSwicGF0aCI6Ii81MTQxMjk0OC80Mzk4MzYzNjEtOWU5NDFlNmQtNDJlMi00MTgxLThmM2QtNDhiYjU0YjQ5NzZiLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA1MDIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNTAyVDA5NDI0MVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTE3NzlhZDQwZDA4NDgxNGY0NjNjYWVlYzJkMzA2NTA1MDkxNTFlYTZmNjY3Y2RmMzcwMDdmYjEwNzE0OGU5Y2EmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.t-RKo62Ce9IbVmJ4K0AwyAhtGfxEg_R8LksG15UT8DQ)
+
+#### TODO: Workflow for the original ckpt
 
 ### 🎨 Enjoy your editing! 
 
