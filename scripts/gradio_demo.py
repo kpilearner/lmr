@@ -51,7 +51,7 @@ def infer(edit_images,
           progress=gr.Progress(track_tqdm=True)
 ):
     
-    image = edit_images["background"]
+    image = edit_images
         
     if image.size[0] != 512:
         print("\033[93m[WARNING] We can only deal with the case where the image's width is 512.\033[0m")
@@ -118,13 +118,11 @@ More **open-source**, with **lower costs**, **faster speed** (it takes about 9 s
 """)
         with gr.Row():
             with gr.Column():
-                edit_image = gr.ImageEditor(
-                    label='Upload and draw mask for inpainting',
+                edit_image = gr.Image(
+                    label='Upload image for editing',
                     type='pil',
                     sources=["upload", "webcam"],
                     image_mode='RGB',
-                    layers=False,
-                    brush=gr.Brush(colors=["#FFFFFF"], color_mode="fixed"),
                     height=600
                 )
                 prompt = gr.Text(
