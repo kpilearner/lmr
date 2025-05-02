@@ -54,7 +54,7 @@ The current model is the one used in the experiments in the paper, trained with 
 - [x] Pretrained Weights
 - [ ] More Inference Demos
 - [x] Gradio demo
-- [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and FLUX Redux)
+- [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and FLUX Redux)
 - [ ] Comfy UI demo official
 - [ ] Training Code
 
