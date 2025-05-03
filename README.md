@@ -174,6 +174,10 @@ The checkpoint utilized in this workflow differs slightly from the one described
 <div align="left">
 
 
+# Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=River-Zhang/ICEdit&type=Date)](https://www.star-history.com/#River-Zhang/ICEdit&Date)
+
 # Bibtex
 If this work is helpful for your research, please consider citing the following BibTeX entry.
 
