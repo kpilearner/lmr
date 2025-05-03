@@ -59,6 +59,8 @@ The current model is the one used in the experiments in the paper, trained with 
 - [ ] Training Code
 
 # 🎆 News 
+- **[2025/5/3]** 🔥 We extend our heartfelt gratitude to [softicelee2](https://github.com/River-Zhang/ICEdit/issues/6#issue-3037410834) for creating an outstanding Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on using ICEdit! 
+- **[2025/5/2]** 🌟 Heartfelt thanks to [judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) for crafting an amazing [Comfy UI demo](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411)! 🚀 Dive in and give it a spin!
 - **[2025/4/30]** 🔥 We release the [Huggingface Demo](https://huggingface.co/spaces/RiverZ/ICEdit) 🤗! Have a try!
 - **[2025/4/30]** 🔥 We release the inference code and [pretrained weights](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main) on Huggingface 🤗!
 - **[2025/4/30]** 🔥 We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv!
@@ -141,6 +143,7 @@ Then you can open the link in your browser to edit images.
 
 <div align="left">
 
+Here is also a Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on how to install and use ICEdit, created by [softicelee2](https://github.com/softicelee2). It's definitely worth a watch!
 
 ## ComfyUI Workflow
 
@@ -151,6 +154,7 @@ We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for c
 The checkpoint utilized in this workflow differs slightly from the one described in the original paper. Please redownload it from [here](https://huggingface.co/aha2023/average_MOE_ICEdit-MoE-LoRA).  This workflow incorporates high-definition refinement, yielding remarkably good results. Moreover, integrating this LoRA with Redux enables outfit changes to a certain degree. Once again, a huge thank you to @[judian17](https://github.com/judian17) for his innovative contributions! For more details about the workflow, please refer to this [issue](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411).
 
 ![comfyui image](docs/images/comfyuiexample.png)
+
 
 #### TODO: Workflow for the original ckpt
 
