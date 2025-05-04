@@ -25,7 +25,7 @@
 
 <div style="width: 80%; margin:auto;">
     <img style="width:100%; display: block; margin: auto;" src="docs/images/teaser.png">
-    <p style="text-align: left;">**Image Editing is worth a single LoRA!** We present In-Context Edit, a novel approach that achieves state-of-the-art instruction-based editing <b>using just 0.5% of the training data and 1% of the parameters required by prior SOTA methods</b>. The first row illustrates a series of multi-turn edits, executed with high precision, while the second and third rows highlight diverse, visually impressive single-turn editing results from our method.</p>
+    <p style="text-align: left;"><strong>Image Editing is worth a single LoRA!</strong> We present In-Context Edit, a novel approach that achieves state-of-the-art instruction-based editing <b>using just 0.5% of the training data and 1% of the parameters required by prior SOTA methods</b>. The first row illustrates a series of multi-turn edits, executed with high precision, while the second and third rows highlight diverse, visually impressive single-turn editing results from our method.</p>
 </div>
 
 :open_book: For more visual results, go checkout our <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">project page</a>
