@@ -1,10 +1,10 @@
 # Use the modified diffusers & peft library
 import sys
 import os
-workspace_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../icedit"))
+# workspace_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../icedit"))
 
-if workspace_dir not in sys.path:
-    sys.path.insert(0, workspace_dir)
+# if workspace_dir not in sys.path:
+#     sys.path.insert(0, workspace_dir)
     
 from diffusers import FluxFillPipeline
 

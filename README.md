@@ -17,7 +17,6 @@
 </div>
 <div>
     <a href="https://arxiv.org/abs/2504.20690" target="_blank">Arxiv</a>&emsp;
-    <a href="https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main" target="_blank">Huggingface 🤗</a>&emsp;
     <a href="https://huggingface.co/spaces/RiverZ/ICEdit" target="_blank">Huggingface Demo 🤗</a>&emsp;
     <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">Project Page</a>
 </div>
@@ -62,7 +61,6 @@ The current model is the one used in the experiments in the paper, trained with 
 - **[2025/5/3]** 🔥 We extend our heartfelt gratitude to [softicelee2](https://github.com/River-Zhang/ICEdit/issues/6#issue-3037410834) for creating an outstanding Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on using ICEdit! 
 - **[2025/5/2]** 🌟 Heartfelt thanks to [judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) for crafting an amazing [Comfy UI demo](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411)! 🚀 Dive in and give it a spin!
 - **[2025/4/30]** 🔥 We release the [Huggingface Demo](https://huggingface.co/spaces/RiverZ/ICEdit) 🤗! Have a try!
-- **[2025/4/30]** 🔥 We release the inference code and [pretrained weights](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main) on Huggingface 🤗!
 - **[2025/4/30]** 🔥 We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv!
 - **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day!
 
@@ -83,7 +81,9 @@ pip install -U huggingface_hub
 If you can connect to Huggingface, you don't need to download the weights. Otherwise, you need to download the weights to local.
 
 - [Flux.1-fill-dev](https://huggingface.co/black-forest-labs/flux.1-fill-dev).
-- [ICEdit-MoE-LoRA](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA).
+- [ICEdit-normal-LoRA](https://huggingface.co/RiverZ/normal-lora/tree/main).
+
+Note: Due to some cooperation permission issues, we have to withdraw the weights and codes of moe-lora temporarily. What is released currently is just the ordinary lora, but it still has powerful performance. If you urgently need the moe lora weights of the original text, please email the author.
 
 ## Inference in bash (w/o VLM Inference-time Scaling)
 
@@ -96,7 +96,7 @@ Now you can have a try!
 ```bash
 python scripts/inference.py --image assets/girl.png \
                             --instruction "Make her hair dark green and her clothes checked." \
-                            --seed 42 \
+                            --seed 304897401 \
 ```
 
 Editing a 512×768 image requires 35 GB of GPU memory. If you need to run on a system with 24 GB of GPU memory (for example, an NVIDIA RTX3090), you can add the `--enable-model-cpu-offload` parameter.
@@ -113,7 +113,7 @@ If you have downloaded the pretrained weights locally, please pass the parameter
 python scripts/inference.py --image assets/girl.png \
                             --instruction "Make her hair dark green and her clothes checked." \
                             --flux-path /path/to/flux.1-fill-dev \
-                            --lora-path /path/to/ICEdit-MoE-LoRA
+                            --lora-path /path/to/ICEdit-normal-LoRA
 ```
 
 ## Inference in Gradio Demo
@@ -129,7 +129,7 @@ Like the inference script, if you want to run the demo on a system with 24 GB of
 ```bash
 python scripts/gradio_demo.py --port 7860 \
                               --flux-path /path/to/flux.1-fill-dev (optional) \
-                              --lora-path /path/to/ICEdit-MoE-LoRA (optional) \
+                              --lora-path /path/to/ICEdit-normal-LoRA (optional) \
                               --enable-model-cpu-offload (optional) \
 ```
 

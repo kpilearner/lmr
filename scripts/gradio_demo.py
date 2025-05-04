@@ -4,10 +4,10 @@ python scripts/gradio_demo.py
 
 import sys
 import os
-workspace_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../icedit"))
+# workspace_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../icedit"))
 
-if workspace_dir not in sys.path:
-    sys.path.insert(0, workspace_dir)
+# if workspace_dir not in sys.path:
+#     sys.path.insert(0, workspace_dir)
     
 from diffusers import FluxFillPipeline
 import gradio as gr
@@ -106,9 +106,9 @@ original_examples = [
 
 # 新增的示例，将元组转换为列表
 new_examples = [
-    ['assets/girl.png', 'Make her hair dark green and her clothes checked.', 42],
-    ['assets/boy.png', 'Change the sunglasses to a Christmas hat.', 27440001],
-    ['assets/kaori.jpg', 'Make it a sketch.', 329918865]
+    ['assets/girl.png', 'Make her hair dark green and her clothes checked.', 304897401],
+    ['assets/boy.png', 'Change the sunglasses to a Christmas hat.', 748891420],
+    ['assets/kaori.jpg', 'Make it a sketch.', 484817364]
 ]
 
 css = """
