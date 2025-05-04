@@ -153,6 +153,8 @@ We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for c
 
 The checkpoint utilized in this workflow differs slightly from the one described in the original paper. Please redownload it from [here](https://huggingface.co/aha2023/average_MOE_ICEdit-MoE-LoRA).  This workflow incorporates high-definition refinement, yielding remarkably good results. Moreover, integrating this LoRA with Redux enables outfit changes to a certain degree. Once again, a huge thank you to @[judian17](https://github.com/judian17) for his innovative contributions! For more details about the workflow, please refer to this [issue](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411).
 
+As we released the [normal lora weights](https://huggingface.co/RiverZ/normal-lora/tree/main) which is more stable than the average_MOE_lora, you can use this in ComfyUI workflow.
+
 ![comfyui image](docs/images/comfyuiexample.png)
 
 
