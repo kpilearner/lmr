@@ -34,6 +34,21 @@ This repository will contain the official implementation of _ICEdit_.
 
 <div align="left">
 
+# 📖 Table of Contents
+
+1. [⚠️ Tips](#⚠️-tips)
+2. [🎆 News](#-news)
+3. [💼 Installation](#-installation)
+   - [Conda environment setup](#conda-environment-setup)
+   - [Download pretrained weights](#download-pretrained-weights)
+   - [Inference in bash (w/o VLM Inference-time Scaling)](#inference-in-bash-wo-vlm-inference-time-scaling)
+   - [Inference in Gradio Demo](#inference-in-gradio-demo)
+   - [ComfyUI Workflow](#comfyui-workflow)
+4. [Comparison with Commercial Models](#comparison-with-commercial-models)
+5. [Star History](#star-history)
+6. [Bibtex](#bibtex)
+
+
 # ⚠️ Tips
 
 ### If you encounter such a failure case, please **try again with a different seed**!
