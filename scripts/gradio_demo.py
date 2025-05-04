@@ -27,7 +27,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--port", type=int, default=7860, help="Port for the Gradio app")
 parser.add_argument("--output-dir", type=str, default="gradio_results", help="Directory to save the output image")
 parser.add_argument("--flux-path", type=str, default='black-forest-labs/flux.1-fill-dev', help="Path to the model")
-parser.add_argument("--lora-path", type=str, default='sanaka87/ICEdit-MoE-LoRA', help="Path to the LoRA weights")
+parser.add_argument("--lora-path", type=str, default='RiverZ/normal-lora', help="Path to the LoRA weights")
 parser.add_argument("--enable-model-cpu-offload", action="store_true", help="Enable CPU offloading for the model")
 args = parser.parse_args()
 
