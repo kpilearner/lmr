@@ -48,9 +48,9 @@ This repository will contain the official implementation of _ICEdit_.
 
 - [🎆 News](#-news)
 - [📖 Table of Contents](#-table-of-contents)
+- [💪 To Do List](#-to-do-list)
 - [⚠️ Tips](#️-tips)
     - [If you encounter such a failure case, please **try again with a different seed**!](#if-you-encounter-such-a-failure-case-please-try-again-with-a-different-seed)
-- [💪 To Do List](#-to-do-list)
 - [💼 Installation](#-installation)
   - [Conda environment setup](#conda-environment-setup)
   - [Download pretrained weights](#download-pretrained-weights)
@@ -65,18 +65,6 @@ This repository will contain the official implementation of _ICEdit_.
 - [Bibtex](#bibtex)
 
 
-# ⚠️ Tips
-
-### If you encounter such a failure case, please **try again with a different seed**!
-
-- Our base model, FLUX, does not inherently support a wide range of styles, so a large portion of our dataset involves style transfer. As a result, the model **may sometimes inexplicably change your artistic style**.
-
-- Our training dataset is **mostly targeted at realistic images**. For non-realistic images, such as **anime** or **blurry pictures**, the success rate of the editing **drop and could potentially affect the final image quality**.
-
-- While the success rates for adding objects, modifying color attributes, applying style transfer, and changing backgrounds are high, the success rate for object removal is relatively lower due to the low quality of the removal dataset we use.
-
-The current model is the one used in the experiments in the paper, trained with only 4 A800 GPUs (total `batch_size` = 2 x 2 x 4 = 16). In the future, we will enhance the dataset, and do scale-up, finally release a more powerful model.
-
 # 💪 To Do List
 
 - [x] Inference Code
@@ -88,6 +76,18 @@ The current model is the one used in the experiments in the paper, trained with 
 - [x] Comfy UI demo with normal lora (by @[Datou](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) in openart)
 - [ ] Training Code
 
+
+# ⚠️ Tips
+
+### If you encounter such a failure case, please **try again with a different seed**!
+
+- Our base model, FLUX, does not inherently support a wide range of styles, so a large portion of our dataset involves style transfer. As a result, the model **may sometimes inexplicably change your artistic style**.
+
+- Our training dataset is **mostly targeted at realistic images**. For non-realistic images, such as **anime** or **blurry pictures**, the success rate of the editing **drop and could potentially affect the final image quality**.
+
+- While the success rates for adding objects, modifying color attributes, applying style transfer, and changing backgrounds are high, the success rate for object removal is relatively lower due to the low quality of the removal dataset we use.
+
+The current model is the one used in the experiments in the paper, trained with only 4 A800 GPUs (total `batch_size` = 2 x 2 x 4 = 16). In the future, we will enhance the dataset, and do scale-up, finally release a more powerful model.
 
 
 # 💼 Installation
