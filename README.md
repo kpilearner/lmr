@@ -36,17 +36,23 @@ This repository will contain the official implementation of _ICEdit_.
 
 # 📖 Table of Contents
 
-1. [⚠️ Tips](#⚠️-tips)
-2. [🎆 News](#-news)
-3. [💼 Installation](#-installation)
-   - [Conda environment setup](#conda-environment-setup)
-   - [Download pretrained weights](#download-pretrained-weights)
-   - [Inference in bash (w/o VLM Inference-time Scaling)](#inference-in-bash-wo-vlm-inference-time-scaling)
-   - [Inference in Gradio Demo](#inference-in-gradio-demo)
-   - [ComfyUI Workflow](#comfyui-workflow)
-4. [Comparison with Commercial Models](#comparison-with-commercial-models)
-5. [Star History](#star-history)
-6. [Bibtex](#bibtex)
+- [📖 Table of Contents](#-table-of-contents)
+- [⚠️ Tips](#️-tips)
+    - [If you encounter such a failure case, please **try again with a different seed**!](#if-you-encounter-such-a-failure-case-please-try-again-with-a-different-seed)
+- [To Do List](#to-do-list)
+- [🎆 News](#-news)
+- [💼 Installation](#-installation)
+  - [Conda environment setup](#conda-environment-setup)
+  - [Download pretrained weights](#download-pretrained-weights)
+  - [Inference in bash (w/o VLM Inference-time Scaling)](#inference-in-bash-wo-vlm-inference-time-scaling)
+  - [Inference in Gradio Demo](#inference-in-gradio-demo)
+  - [ComfyUI Workflow](#comfyui-workflow)
+    - [ComfyUI-nunchaku](#comfyui-nunchaku)
+      - [TODO: Workflow for the MoE ckpt](#todo-workflow-for-the-moe-ckpt)
+    - [🎨 Enjoy your editing!](#-enjoy-your-editing)
+- [Comparison with Commercial Models](#comparison-with-commercial-models)
+- [Star History](#star-history)
+- [Bibtex](#bibtex)
 
 
 # ⚠️ Tips
@@ -68,7 +74,7 @@ The current model is the one used in the experiments in the paper, trained with 
 - [x] Pretrained Weights
 - [ ] More Inference Demos
 - [x] Gradio demo
-- [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and FLUX Redux)
+- [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and FLUX Redux. Only 4GB VRAM GPU is enough to run!)
 - [ ] Comfy UI demo official
 - [ ] Training Code
 
