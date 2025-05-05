@@ -48,7 +48,7 @@ This repository will contain the official implementation of _ICEdit_.
   - [Inference in Gradio Demo](#inference-in-gradio-demo)
   - [ComfyUI Workflow](#comfyui-workflow)
     - [ComfyUI-nunchaku](#comfyui-nunchaku)
-      - [TODO: Workflow for the MoE ckpt](#todo-workflow-for-the-moe-ckpt)
+    - [ComfyUI](#comfyui)
     - [🎨 Enjoy your editing!](#-enjoy-your-editing)
 - [Comparison with Commercial Models](#comparison-with-commercial-models)
 - [Star History](#star-history)
@@ -177,7 +177,11 @@ The checkpoint utilized in this workflow differs slightly from the one described
 ![comfyui image](docs/images/comfyuiexample.png)
 
 
-#### TODO: Workflow for the MoE ckpt
+### ComfyUI
+
+Thanks to [Datou](https://x.com/Datou), a workflow of ICEdit in ComfyUI can also be downloaded [here](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB). Try it with the [normal lora ckpt](https://huggingface.co/RiverZ/normal-lora/tree/main).
+
+<img src="docs/images/workflow.png" width="80%" style="display: block; margin: auto;">
 
 ### 🎨 Enjoy your editing! 
 
