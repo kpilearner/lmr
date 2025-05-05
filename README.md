@@ -34,24 +34,34 @@ This repository will contain the official implementation of _ICEdit_.
 
 <div align="left">
 
+
+# 🎆 News 
+- **[2025/5/5]** 🌟 Heartfelt thanks to [Datou](https://x.com/Datou) for creating a fantastic [ComfyUI workflow](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) on OpenArt! 🚀 Have a try!
+- **[2025/5/3]** 🔥 We extend our heartfelt gratitude to [softicelee2](https://github.com/River-Zhang/ICEdit/issues/6#issue-3037410834) for creating an outstanding Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on using ICEdit! 
+- **[2025/5/2]** 🌟 Heartfelt thanks to [judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) for crafting an amazing [ComfyUI-nunchaku demo](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411)! Only 4GB VRAM GPU is enough to run with ComfyUI-nunchaku!🚀 Dive in and give it a spin!
+- **[2025/4/30]** 🔥 We release the [Huggingface Demo](https://huggingface.co/spaces/RiverZ/ICEdit) 🤗! Have a try!
+- **[2025/4/30]** 🔥 We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv!
+- **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day!
+
+
 # 📖 Table of Contents
 
+- [🎆 News](#-news)
 - [📖 Table of Contents](#-table-of-contents)
 - [⚠️ Tips](#️-tips)
     - [If you encounter such a failure case, please **try again with a different seed**!](#if-you-encounter-such-a-failure-case-please-try-again-with-a-different-seed)
-- [To Do List](#to-do-list)
-- [🎆 News](#-news)
+- [💪 To Do List](#-to-do-list)
 - [💼 Installation](#-installation)
   - [Conda environment setup](#conda-environment-setup)
   - [Download pretrained weights](#download-pretrained-weights)
   - [Inference in bash (w/o VLM Inference-time Scaling)](#inference-in-bash-wo-vlm-inference-time-scaling)
   - [Inference in Gradio Demo](#inference-in-gradio-demo)
-  - [ComfyUI Workflow](#comfyui-workflow)
+  - [🎨ComfyUI Workflow](#comfyui-workflow)
     - [ComfyUI-nunchaku](#comfyui-nunchaku)
     - [ComfyUI](#comfyui)
     - [🎨 Enjoy your editing!](#-enjoy-your-editing)
-- [Comparison with Commercial Models](#comparison-with-commercial-models)
-- [Star History](#star-history)
+- [💪 Comparison with Commercial Models](#-comparison-with-commercial-models)
+- [🌟 Star History](#-star-history)
 - [Bibtex](#bibtex)
 
 
@@ -67,7 +77,7 @@ This repository will contain the official implementation of _ICEdit_.
 
 The current model is the one used in the experiments in the paper, trained with only 4 A800 GPUs (total `batch_size` = 2 x 2 x 4 = 16). In the future, we will enhance the dataset, and do scale-up, finally release a more powerful model.
 
-# To Do List
+# 💪 To Do List
 
 - [x] Inference Code
 - [ ] Inference-time Scaling with VLM
@@ -78,12 +88,6 @@ The current model is the one used in the experiments in the paper, trained with 
 - [x] Comfy UI demo with normal lora (by @[Datou](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) in openart)
 - [ ] Training Code
 
-# 🎆 News 
-- **[2025/5/3]** 🔥 We extend our heartfelt gratitude to [softicelee2](https://github.com/River-Zhang/ICEdit/issues/6#issue-3037410834) for creating an outstanding Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on using ICEdit! 
-- **[2025/5/2]** 🌟 Heartfelt thanks to [judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) for crafting an amazing [Comfy UI demo](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411)! 🚀 Dive in and give it a spin!
-- **[2025/4/30]** 🔥 We release the [Huggingface Demo](https://huggingface.co/spaces/RiverZ/ICEdit) 🤗! Have a try!
-- **[2025/4/30]** 🔥 We release the [paper](https://arxiv.org/abs/2504.20690) on arXiv!
-- **[2025/4/29]** We release the [project page](https://river-zhang.github.io/ICEdit-gh-pages/) and demo video! Codes will be made available in next week~ Happy Labor Day!
 
 
 # 💼 Installation
@@ -166,7 +170,7 @@ Then you can open the link in your browser to edit images.
 
 Here is also a Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on how to install and use ICEdit, created by [softicelee2](https://github.com/softicelee2). It's definitely worth a watch!
 
-## ComfyUI Workflow
+## 🎨ComfyUI Workflow
 
 ### ComfyUI-nunchaku
 
@@ -187,7 +191,7 @@ Thanks to [Datou](https://x.com/Datou), a workflow of ICEdit in ComfyUI can also
 
 
 
-# Comparison with Commercial Models
+# 💪 Comparison with Commercial Models
 
 <div align="center">
 <div style="width: 80%; text-align: left; margin:auto;">
@@ -199,7 +203,7 @@ Thanks to [Datou](https://x.com/Datou), a workflow of ICEdit in ComfyUI can also
 <div align="left">
 
 
-# Star History
+# 🌟 Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=River-Zhang/ICEdit&type=Date)](https://www.star-history.com/#River-Zhang/ICEdit&Date)
 
