@@ -75,7 +75,7 @@ The current model is the one used in the experiments in the paper, trained with 
 - [ ] More Inference Demos
 - [x] Gradio demo
 - [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and FLUX Redux. Only 4GB VRAM GPU is enough to run!)
-- [ ] Comfy UI demo official
+- [x] Comfy UI demo with normal lora (by @[Datou](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) in openart)
 - [ ] Training Code
 
 # 🎆 News 
