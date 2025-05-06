@@ -36,7 +36,7 @@ This repository will contain the official implementation of _ICEdit_.
 
 
 # 🎆 News 
-- **[2025/5/6]** 🔥 ICEdit currently ranks **2nd** on the weekly trending list of [Hugging Face space](https://huggingface.co/spaces), second only to Qwen3! It ranks among the **Top 5** on the overall trend ranking list! Thank you all for your support and love!🤗
+- **[2025/5/6]** 🔥 ICEdit currently ranks **2nd** on the overall/weekly trending list of [Hugging Face space](https://huggingface.co/spaces) Thank you all for your support and love!🤗
 - **[2025/5/5]** 🌟 Heartfelt thanks to [Datou](https://x.com/Datou) for creating a fantastic [ComfyUI workflow](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) on OpenArt! 🚀 Have a try!
 - **[2025/5/3]** 🔥 We extend our heartfelt gratitude to [softicelee2](https://github.com/River-Zhang/ICEdit/issues/6#issue-3037410834) for creating an outstanding Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on using ICEdit! 
 - **[2025/5/2]** 🌟 Heartfelt thanks to [judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) for crafting an amazing [ComfyUI-nunchaku demo](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411)! Only **4GB VRAM GPU** is enough to run with ComfyUI-nunchaku!🚀 Dive in and give it a spin!
