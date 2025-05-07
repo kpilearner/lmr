@@ -33,7 +33,7 @@
 <div align="left">
 
 
-### 📢 Attention All: Incorrect Workflow Usage Alert — Read Now!
+### 📢 Attention All: Incorrect ComfyUI Workflow Usage Alert — Read Now!
 You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!)
 
 Please **use the Normal LoRA** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
