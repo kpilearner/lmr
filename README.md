@@ -44,6 +44,7 @@ However, we'd like to emphasize two important points:
 
 
 # 🎆 News 
+- **[2025/5/7]** 🌟 Heartfelt thanks to [T8star](https://x.com/T8star_Aix) for making a [tutorial](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [ComfyUI workflow](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) on how to **increase the editing success to 100%**!🚀 Have a try!
 - **[2025/5/6]** 🔥 ICEdit currently ranks **2nd** on the overall/weekly trending list of [Hugging Face space](https://huggingface.co/spaces). Thank you all for your support and love!🤗
 - **[2025/5/5]** 🌟 Heartfelt thanks to [Datou](https://x.com/Datou) for creating a fantastic [ComfyUI workflow](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) on OpenArt! 🚀 Have a try!
 - **[2025/5/3]** 🔥 We extend our heartfelt gratitude to [softicelee2](https://github.com/River-Zhang/ICEdit/issues/6#issue-3037410834) for creating an outstanding Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on using ICEdit! 
