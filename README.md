@@ -29,8 +29,6 @@
 
 :open_book: For more visual results, go checkout our <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">project page</a>
 
-This repository will contain the official implementation of _ICEdit_.
-
 
 <div align="left">
 
