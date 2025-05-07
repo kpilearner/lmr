@@ -60,6 +60,7 @@ However, we'd like to emphasize two important points:
 - [📖 Table of Contents](#-table-of-contents)
 - [💪 To Do List](#-to-do-list)
 - [🎨ComfyUI Workflow](#comfyui-workflow)
+  - [⚠️ A Big Note:](#️-a-big-note)
     - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
     - [ComfyUI-nunchaku](#comfyui-nunchaku)
     - [ComfyUI-workflow](#comfyui-workflow-1)
@@ -88,6 +89,11 @@ However, we'd like to emphasize two important points:
 
 
 # 🎨ComfyUI Workflow
+
+## ⚠️ A Big Note:
+You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!)
+
+Please **use the Normal LoRA** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
 
 ### ComfyUI-workflow for increased editing success rate
 Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV13fV2ziED5/?spm_id_from=333.337.search-card.all.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative workflow ([OpenArt](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) [RunningHub](https://www.runninghub.cn/post/1919593964804964354?utm_source=kol01-RH099)) that could increase the editing success rate greatly (about 100%)! Have a try with it!
