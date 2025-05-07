@@ -90,7 +90,7 @@ However, we'd like to emphasize two important points:
 # 🎨ComfyUI Workflow
 
 ### ComfyUI-workflow for increased editing success rate
-Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV13fV2ziED5/?spm_id_from=333.337.search-card.all.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative [workflow](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) that could increase the editing success rate greatly (about 100%)! Have a try with it!
+Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV13fV2ziED5/?spm_id_from=333.337.search-card.all.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative workflow ([OpenArt](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) [RunningHub](https://www.runninghub.cn/post/1919593964804964354?utm_source=kol01-RH099)) that could increase the editing success rate greatly (about 100%)! Have a try with it!
 
 <img src="docs/images/workflow_t8.png" width="80%" style="display: block; margin: auto;">
 
