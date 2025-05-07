@@ -37,6 +37,8 @@
 - You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!) [Datou](https://x.com/Datou) has updated his [ComfyUI workflow](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB), have a try!
 - Please **use the Normal LoRA** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
 
+- 🔥💐🎆 Welcome to share your **creative workflows** (such as combining Redux, ACE, etc.) in the Issues section and showcase the results! We will include references so that more people can see your creativity.
+
 
 # 🎆 News 
 - **[2025/5/7]** 🌟 Heartfelt thanks to [T8star](https://x.com/T8star_Aix) for making a [tutorial](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [ComfyUI workflow](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) on how to **increase the editing success to 100%**!🚀 Have a try!
