@@ -59,7 +59,7 @@ However, we'd like to emphasize two important points:
 - [🎆 News](#-news)
 - [📖 Table of Contents](#-table-of-contents)
 - [💪 To Do List](#-to-do-list)
-  - [🎨ComfyUI Workflow](#comfyui-workflow)
+- [🎨ComfyUI Workflow](#comfyui-workflow)
     - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
     - [ComfyUI-nunchaku](#comfyui-nunchaku)
     - [ComfyUI-workflow](#comfyui-workflow-1)
@@ -87,7 +87,7 @@ However, we'd like to emphasize two important points:
 - [ ] Training Code
 
 
-## 🎨ComfyUI Workflow
+# 🎨ComfyUI Workflow
 
 ### ComfyUI-workflow for increased editing success rate
 Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV13fV2ziED5/?spm_id_from=333.337.search-card.all.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative [workflow](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) that could increase the editing success rate greatly (about 100%)! Have a try with it!
