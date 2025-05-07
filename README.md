@@ -18,6 +18,7 @@
 <div>
     <a href="https://arxiv.org/abs/2504.20690" target="_blank">Arxiv</a>&emsp;
     <a href="https://huggingface.co/spaces/RiverZ/ICEdit" target="_blank">Huggingface Demo 🤗</a>&emsp;
+    <a href="https://huggingface.co/RiverZ/normal-lora/tree/main" target="_blank">Model 🤗</a>&emsp;
     <a href="https://river-zhang.github.io/ICEdit-gh-pages/" target="_blank">Project Page</a>
 </div>
 
