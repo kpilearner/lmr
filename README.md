@@ -34,6 +34,14 @@ This repository will contain the official implementation of _ICEdit_.
 
 <div align="left">
 
+### ⚠️ Clarification
+
+We've noticed numerous web pages related to ICEdit, including [https://icedit.net/](https://icedit.net/), [https://icedit.org/](https://icedit.org/). Kudos to those who built these pages!
+
+However, we'd like to emphasize two important points:
+- **No Commercial Use**: Our project **cannot** be used for commercial purposes. Please check the [LICENSE](https://github.com/River-Zhang/ICEdit/blob/main/LICENSE) for details.
+- **Official Page**: The official project page is [https://river-zhang.github.io/ICEdit-gh-pages/](https://river-zhang.github.io/ICEdit-gh-pages/).
+
 
 # 🎆 News 
 - **[2025/5/6]** 🔥 ICEdit currently ranks **2nd** on the weekly trending list of [Hugging Face space](https://huggingface.co/spaces), second only to Qwen3! It ranks among the **Top 5** on the overall trend ranking list! Thank you all for your support and love!🤗
