@@ -60,7 +60,7 @@ However, we'd like to emphasize two important points:
 - [📖 Table of Contents](#-table-of-contents)
 - [💪 To Do List](#-to-do-list)
 - [🎨ComfyUI Workflow](#comfyui-workflow)
-  - [⚠️ A Big Note:](#️-a-big-note)
+  - [📢 Attention All: Incorrect Workflow Usage Alert — Read Now!](#-attention-all-incorrect-workflow-usage-alert--read-now)
     - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
     - [ComfyUI-nunchaku](#comfyui-nunchaku)
     - [ComfyUI-workflow](#comfyui-workflow-1)
@@ -90,7 +90,7 @@ However, we'd like to emphasize two important points:
 
 # 🎨ComfyUI Workflow
 
-## ⚠️ A Big Note:
+## 📢 Attention All: Incorrect Workflow Usage Alert — Read Now!
 You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!)
 
 Please **use the Normal LoRA** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
