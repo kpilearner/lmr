@@ -94,9 +94,9 @@ Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](http
 
 ### ComfyUI-nunchaku
 
-We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) to effortlessly run our model within ComfyUI. 
+We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) to effortlessly run our model within ComfyUI. Only **4GB VRAM GPU** is enough to run with ComfyUI-nunchaku! 
 
-The checkpoint utilized in this workflow differs slightly from the one described in the original paper. Please redownload it from [here](https://huggingface.co/RiverZ/normal-lora/tree/main).  This workflow incorporates high-definition refinement, yielding remarkably good results. Moreover, integrating this LoRA with Redux enables outfit changes to a certain degree. Once again, a huge thank you to @[judian17](https://github.com/judian17) for his innovative contributions! For more details about the workflow, please refer to this [issue](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411).
+This workflow incorporates high-definition refinement, yielding remarkably good results. Moreover, integrating this LoRA with Redux enables outfit changes to a certain degree. Once again, a huge thank you to @[judian17](https://github.com/judian17) for his innovative contributions! 
 
 ![comfyui image](docs/images/comfyuiexample.png)
 
