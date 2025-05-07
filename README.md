@@ -68,7 +68,8 @@ However, we'd like to emphasize two important points:
   - [Inference in Gradio Demo](#inference-in-gradio-demo)
   - [🎨ComfyUI Workflow](#comfyui-workflow)
     - [ComfyUI-nunchaku](#comfyui-nunchaku)
-    - [ComfyUI](#comfyui)
+    - [ComfyUI-workflow](#comfyui-workflow-1)
+    - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
     - [🎨 Enjoy your editing!](#-enjoy-your-editing)
 - [💪 Comparison with Commercial Models](#-comparison-with-commercial-models)
 - [🌟 Star History](#-star-history)
@@ -191,11 +192,19 @@ The checkpoint utilized in this workflow differs slightly from the one described
 ![comfyui image](docs/images/comfyuiexample.png)
 
 
-### ComfyUI
+### ComfyUI-workflow
 
 Thanks to [Datou](https://x.com/Datou), a workflow of ICEdit in ComfyUI can also be downloaded [here](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB). Try it with the [normal lora ckpt](https://huggingface.co/RiverZ/normal-lora/tree/main).
 
 <img src="docs/images/workflow.png" width="80%" style="display: block; margin: auto;">
+
+
+
+### ComfyUI-workflow for increased editing success rate
+Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV13fV2ziED5/?spm_id_from=333.337.search-card.all.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative [workflow](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) that could increase the editing success rate greatly (about 100%)! Have a try with it!
+
+<img src="docs/images/workflow-t8.png" width="80%" style="display: block; margin: auto;">
+
 
 ### 🎨 Enjoy your editing! 
 
