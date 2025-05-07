@@ -37,14 +37,6 @@
 - You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!) [Datou](https://x.com/Datou) has updated his [ComfyUI workflow](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB), have a try!
 - Please **use the Normal LoRA** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
 
-### ⚠️ Clarification
-
-We've noticed numerous web pages related to ICEdit, including [https://icedit.net/](https://icedit.net/), [https://icedit.org/](https://icedit.org/). Kudos to those who built these pages!
-
-However, we'd like to emphasize two important points:
-- **No Commercial Use**: Our project **cannot** be used for commercial purposes. Please check the [LICENSE](https://github.com/River-Zhang/ICEdit/blob/main/LICENSE) for details.
-- **Official Page**: The official project page is [https://river-zhang.github.io/ICEdit-gh-pages/](https://river-zhang.github.io/ICEdit-gh-pages/).
-
 
 # 🎆 News 
 - **[2025/5/7]** 🌟 We update some notes when using the ComfyUI workflow to avoid unsatisfactory results! 
@@ -67,6 +59,7 @@ However, we'd like to emphasize two important points:
     - [ComfyUI-workflow](#comfyui-workflow-1)
 - [⚠️ Tips](#️-tips)
     - [If you encounter such a failure case, please **try again with a different seed**!](#if-you-encounter-such-a-failure-case-please-try-again-with-a-different-seed)
+    - [⚠️ Clarification](#️-clarification)
 - [💼 Installation](#-installation)
   - [Conda environment setup](#conda-environment-setup)
   - [Download pretrained weights](#download-pretrained-weights)
@@ -124,6 +117,13 @@ Thanks to [Datou](https://x.com/Datou), a workflow of ICEdit in ComfyUI can also
 
 The current model is the one used in the experiments in the paper, trained with only 4 A800 GPUs (total `batch_size` = 2 x 2 x 4 = 16). In the future, we will enhance the dataset, and do scale-up, finally release a more powerful model.
 
+### ⚠️ Clarification
+
+We've noticed numerous web pages related to ICEdit, including [https://icedit.net/](https://icedit.net/), [https://icedit.org/](https://icedit.org/). Kudos to those who built these pages!
+
+However, we'd like to emphasize two important points:
+- **No Commercial Use**: Our project **cannot** be used for commercial purposes. Please check the [LICENSE](https://github.com/River-Zhang/ICEdit/blob/main/LICENSE) for details.
+- **Official Page**: The official project page is [https://river-zhang.github.io/ICEdit-gh-pages/](https://river-zhang.github.io/ICEdit-gh-pages/).
 
 # 💼 Installation
 
