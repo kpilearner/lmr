@@ -60,9 +60,9 @@ However, we'd like to emphasize two important points:
 - [📖 Table of Contents](#-table-of-contents)
 - [💪 To Do List](#-to-do-list)
   - [🎨ComfyUI Workflow](#comfyui-workflow)
+    - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
     - [ComfyUI-nunchaku](#comfyui-nunchaku)
     - [ComfyUI-workflow](#comfyui-workflow-1)
-    - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
 - [⚠️ Tips](#️-tips)
     - [If you encounter such a failure case, please **try again with a different seed**!](#if-you-encounter-such-a-failure-case-please-try-again-with-a-different-seed)
 - [💼 Installation](#-installation)
@@ -89,6 +89,12 @@ However, we'd like to emphasize two important points:
 
 ## 🎨ComfyUI Workflow
 
+### ComfyUI-workflow for increased editing success rate
+Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV13fV2ziED5/?spm_id_from=333.337.search-card.all.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative [workflow](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) that could increase the editing success rate greatly (about 100%)! Have a try with it!
+
+<img src="docs/images/workflow_t8.png" width="80%" style="display: block; margin: auto;">
+
+
 ### ComfyUI-nunchaku
 
 We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) to effortlessly run our model within ComfyUI. 
@@ -105,11 +111,6 @@ Thanks to [Datou](https://x.com/Datou), a workflow of ICEdit in ComfyUI can also
 <img src="docs/images/workflow.png" width="80%" style="display: block; margin: auto;">
 
 
-
-### ComfyUI-workflow for increased editing success rate
-Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV13fV2ziED5/?spm_id_from=333.337.search-card.all.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative [workflow](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) that could increase the editing success rate greatly (about 100%)! Have a try with it!
-
-<img src="docs/images/workflow_t8.png" width="80%" style="display: block; margin: auto;">
 
 
 
