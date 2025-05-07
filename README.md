@@ -59,6 +59,10 @@ However, we'd like to emphasize two important points:
 - [🎆 News](#-news)
 - [📖 Table of Contents](#-table-of-contents)
 - [💪 To Do List](#-to-do-list)
+  - [🎨ComfyUI Workflow](#comfyui-workflow)
+    - [ComfyUI-nunchaku](#comfyui-nunchaku)
+    - [ComfyUI-workflow](#comfyui-workflow-1)
+    - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
 - [⚠️ Tips](#️-tips)
     - [If you encounter such a failure case, please **try again with a different seed**!](#if-you-encounter-such-a-failure-case-please-try-again-with-a-different-seed)
 - [💼 Installation](#-installation)
@@ -66,11 +70,6 @@ However, we'd like to emphasize two important points:
   - [Download pretrained weights](#download-pretrained-weights)
   - [Inference in bash (w/o VLM Inference-time Scaling)](#inference-in-bash-wo-vlm-inference-time-scaling)
   - [Inference in Gradio Demo](#inference-in-gradio-demo)
-  - [🎨ComfyUI Workflow](#comfyui-workflow)
-    - [ComfyUI-nunchaku](#comfyui-nunchaku)
-    - [ComfyUI-workflow](#comfyui-workflow-1)
-    - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
-    - [🎨 Enjoy your editing!](#-enjoy-your-editing)
 - [💪 Comparison with Commercial Models](#-comparison-with-commercial-models)
 - [🌟 Star History](#-star-history)
 - [Bibtex](#bibtex)
@@ -86,6 +85,33 @@ However, we'd like to emphasize two important points:
 - [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and FLUX Redux. Only 4GB VRAM GPU is enough to run!)
 - [x] Comfy UI demo with normal lora (by @[Datou](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) in openart)
 - [ ] Training Code
+
+
+## 🎨ComfyUI Workflow
+
+### ComfyUI-nunchaku
+
+We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) to effortlessly run our model within ComfyUI. 
+
+The checkpoint utilized in this workflow differs slightly from the one described in the original paper. Please redownload it from [here](https://huggingface.co/RiverZ/normal-lora/tree/main).  This workflow incorporates high-definition refinement, yielding remarkably good results. Moreover, integrating this LoRA with Redux enables outfit changes to a certain degree. Once again, a huge thank you to @[judian17](https://github.com/judian17) for his innovative contributions! For more details about the workflow, please refer to this [issue](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411).
+
+![comfyui image](docs/images/comfyuiexample.png)
+
+
+### ComfyUI-workflow
+
+Thanks to [Datou](https://x.com/Datou), a workflow of ICEdit in ComfyUI can also be downloaded [here](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB). Try it with the [normal lora ckpt](https://huggingface.co/RiverZ/normal-lora/tree/main).
+
+<img src="docs/images/workflow.png" width="80%" style="display: block; margin: auto;">
+
+
+
+### ComfyUI-workflow for increased editing success rate
+Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV13fV2ziED5/?spm_id_from=333.337.search-card.all.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative [workflow](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) that could increase the editing success rate greatly (about 100%)! Have a try with it!
+
+<img src="docs/images/workflow_t8.png" width="80%" style="display: block; margin: auto;">
+
+
 
 
 # ⚠️ Tips
@@ -181,32 +207,8 @@ Then you can open the link in your browser to edit images.
 
 Here is also a Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on how to install and use ICEdit, created by [softicelee2](https://github.com/softicelee2). It's definitely worth a watch!
 
-## 🎨ComfyUI Workflow
-
-### ComfyUI-nunchaku
-
-We extend our heartfelt thanks to @[judian17](https://github.com/judian17) for crafting a ComfyUI [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) that facilitates seamless usage of our model. Explore this excellent [workflow](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411) to effortlessly run our model within ComfyUI. 
-
-The checkpoint utilized in this workflow differs slightly from the one described in the original paper. Please redownload it from [here](https://huggingface.co/RiverZ/normal-lora/tree/main).  This workflow incorporates high-definition refinement, yielding remarkably good results. Moreover, integrating this LoRA with Redux enables outfit changes to a certain degree. Once again, a huge thank you to @[judian17](https://github.com/judian17) for his innovative contributions! For more details about the workflow, please refer to this [issue](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411).
-
-![comfyui image](docs/images/comfyuiexample.png)
 
 
-### ComfyUI-workflow
-
-Thanks to [Datou](https://x.com/Datou), a workflow of ICEdit in ComfyUI can also be downloaded [here](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB). Try it with the [normal lora ckpt](https://huggingface.co/RiverZ/normal-lora/tree/main).
-
-<img src="docs/images/workflow.png" width="80%" style="display: block; margin: auto;">
-
-
-
-### ComfyUI-workflow for increased editing success rate
-Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV13fV2ziED5/?spm_id_from=333.337.search-card.all.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative [workflow](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) that could increase the editing success rate greatly (about 100%)! Have a try with it!
-
-<img src="docs/images/workflow-t8.png" width="80%" style="display: block; margin: auto;">
-
-
-### 🎨 Enjoy your editing! 
 
 
 
