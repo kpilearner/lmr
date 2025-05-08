@@ -35,6 +35,7 @@
 
 
 ### 📢 Attention All: Incorrect ComfyUI Workflow Usage Alert — Read Now!
+- We have released our **official ComfyUI workflow** for proper usage! Check our repository and have a try!
 - You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!) [Datou](https://x.com/Datou) has updated his [ComfyUI workflow](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB), have a try! (The code for the Hugging Face gradio demo already embeds this prompt. So, you can simply input the editing instructions without additional setup.)
 - The width of the input image must resize to **512** (no restriction to height).
 - Please **use the Normal LoRA** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
@@ -42,6 +43,7 @@
 
 
 # 🎆 News 
+- **[2025/5/8]** 🔥 We have released our official ComfyUI demo! 🚀 Check the repository and have a try!
 - **[2025/5/7]** 🌟 Heartfelt thanks to [T8star](https://x.com/T8star_Aix) for making a [tutorial](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [ComfyUI workflow](https://www.runninghub.cn/post/1920075398585974786/?utm_source=kol01-RH099) on how to **increase the editing success to 100%**!🚀 Have a try!
 - **[2025/5/7]** 🌟 We update some notes when using the ComfyUI workflow to avoid unsatisfactory results! 
 - **[2025/5/6]** 🔥 ICEdit currently ranks **2nd** on the overall/weekly trending list of [Hugging Face space](https://huggingface.co/spaces). Thank you all for your support and love!🤗
@@ -59,6 +61,7 @@
 - [📖 Table of Contents](#-table-of-contents)
 - [💪 To Do List](#-to-do-list)
 - [🎨ComfyUI Workflow](#comfyui-workflow)
+    - [Official ComfyUI-workflow](#official-comfyui-workflow)
     - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
     - [ComfyUI-nunchaku](#comfyui-nunchaku)
     - [ComfyUI-workflow](#comfyui-workflow-1)
@@ -88,6 +91,12 @@
 
 
 # 🎨ComfyUI Workflow
+
+
+### Official ComfyUI-workflow
+ We have released our **official ComfyUI workflow** in this repository for correct usage of our model! **We have embedded the prompt "A diptych with two side-by-side images of the same scene ... but" into our nodes** and you just need to input the edit instructions such as "make the girl wear pink sunglasses". We also add a high resolution refinement module for better image quality! The total VRAM consumption is about 14GB. For smaller VRAM usage please try the following fantastic workflows!
+
+ <img src="docs/images/official_workflow.png" width="80%" style="display: block; margin: auto;">
 
 ### ComfyUI-workflow for increased editing success rate
 Thanks to [T8star](https://x.com/T8star_Aix)! He made a tutorial ([Youtube](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [bilibili](https://www.bilibili.com/video/BV11HVhz1Eky/?spm_id_from=333.40164.top_right_bar_window_dynamic.content.click&vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)) and a creative workflow ([OpenArt](https://openart.ai/workflows/t8star/icedit100v1/HN4EZ2Cej98ZX8CC1RK5) and [RunningHub](https://www.runninghub.cn/post/1920075398585974786/?utm_source=kol01-RH099)) that could increase the editing success rate greatly (about 100%)! Have a try with it!
