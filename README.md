@@ -94,7 +94,7 @@
 
 
 ### Official ComfyUI-workflow
- We have released our **official ComfyUI workflow** in this repository for correct usage of our model! **We have embedded the prompt "A diptych with two side-by-side images of the same scene ... but" into our nodes** and you just need to input the edit instructions such as "make the girl wear pink sunglasses". We also add a high resolution refinement module for better image quality! The total VRAM consumption is about 14GB. For smaller VRAM usage please try the following fantastic workflows!
+We have released our **official ComfyUI workflow** in this repository for correct usage of our model! **We have embedded the prompt "A diptych with two side-by-side images of the same scene ... but" into our nodes** and you just need to input the edit instructions such as "make the girl wear pink sunglasses". We also add a high resolution refinement module for better image quality! The total VRAM consumption is about 14GB. For smaller VRAM usage please try the following fantastic workflows!
 
  <img src="docs/images/official_workflow.png" width="80%" style="display: block; margin: auto;">
 
