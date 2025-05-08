@@ -35,7 +35,7 @@
 
 
 ### 📢 Attention All: Incorrect ComfyUI Workflow Usage Alert — Read Now!
-- We have released our **official ComfyUI workflow** for proper usage! Check our repository and have a try!
+- ### We have released our **official ComfyUI workflow** for proper usage! Check our repository and have a try!
 - You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!) [Datou](https://x.com/Datou) has updated his [ComfyUI workflow](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB), have a try! (The code for the Hugging Face gradio demo already embeds this prompt. So, you can simply input the editing instructions without additional setup.)
 - The width of the input image must resize to **512** (no restriction to height).
 - Please **[use the Normal LoRA](https://huggingface.co/RiverZ/normal-lora/tree/main)** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
@@ -43,7 +43,15 @@
 
 
 # 🎆 News 
+
+### 👑 Feel free to share your results in this [Gallery](https://github.com/River-Zhang/ICEdit/discussions/21)!
+
 - **[2025/5/8]** 🔥 We have released our **official ComfyUI workflow**! 🚀 Check the repository and have a try!
+
+- **[2025/5/8]** 🔥 We have added LoRA scale slider in the demo. You can try to discover more interesting demo with different scale! 
+
+![alt text](docs/images/lora_scale.png)
+
 - **[2025/5/7]** 🌟 Heartfelt thanks to [T8star](https://x.com/T8star_Aix) for making a [tutorial](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [ComfyUI workflow](https://www.runninghub.cn/post/1920075398585974786/?utm_source=kol01-RH099) on how to **increase the editing success to 100%**!🚀 Have a try!
 - **[2025/5/7]** 🌟 We update some notes when using the ComfyUI workflow to avoid unsatisfactory results! 
 - **[2025/5/6]** 🔥 ICEdit currently ranks **2nd** on the overall/weekly trending list of [Hugging Face space](https://huggingface.co/spaces). Thank you all for your support and love!🤗
