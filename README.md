@@ -43,7 +43,7 @@
 
 
 # 🎆 News 
-- **[2025/5/8]** 🔥 We have released our official ComfyUI demo! 🚀 Check the repository and have a try!
+- **[2025/5/8]** 🔥 We have released our **official ComfyUI workflow**! 🚀 Check the repository and have a try!
 - **[2025/5/7]** 🌟 Heartfelt thanks to [T8star](https://x.com/T8star_Aix) for making a [tutorial](https://www.youtube.com/watch?v=s6GMKL-Jjos) and [ComfyUI workflow](https://www.runninghub.cn/post/1920075398585974786/?utm_source=kol01-RH099) on how to **increase the editing success to 100%**!🚀 Have a try!
 - **[2025/5/7]** 🌟 We update some notes when using the ComfyUI workflow to avoid unsatisfactory results! 
 - **[2025/5/6]** 🔥 ICEdit currently ranks **2nd** on the overall/weekly trending list of [Hugging Face space](https://huggingface.co/spaces). Thank you all for your support and love!🤗
