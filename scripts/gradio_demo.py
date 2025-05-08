@@ -33,7 +33,7 @@ parser.add_argument("--lora-path", type=str, default='RiverZ/normal-lora', help=
 parser.add_argument("--enable-model-cpu-offload", action="store_true", help="Enable CPU offloading for the model")
 args = parser.parse_args()
 
-pipe = FluxFillPipeline.from_pretrained(args.flux_path, torch_dtype=torch.bfloat16, cache_dir="/scratch/2025_05/jixie")
+pipe = FluxFillPipeline.from_pretrained(args.flux_path, torch_dtype=torch.bfloat16)
 pipe.load_lora_weights(args.lora_path, adapter_name="icedit")
 pipe.set_adapters("icedit", 1.0)
 
