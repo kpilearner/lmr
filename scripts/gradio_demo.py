@@ -22,6 +22,8 @@ from PIL import Image
 MAX_SEED = np.iinfo(np.int32).max
 MAX_IMAGE_SIZE = 1024
 
+current_lora_scale = 1.0
+
 
 parser = argparse.ArgumentParser() 
 parser.add_argument("--port", type=int, default=7860, help="Port for the Gradio app")
@@ -31,8 +33,9 @@ parser.add_argument("--lora-path", type=str, default='RiverZ/normal-lora', help=
 parser.add_argument("--enable-model-cpu-offload", action="store_true", help="Enable CPU offloading for the model")
 args = parser.parse_args()
 
-pipe = FluxFillPipeline.from_pretrained(args.flux_path, torch_dtype=torch.bfloat16)
-pipe.load_lora_weights(args.lora_path)
+pipe = FluxFillPipeline.from_pretrained(args.flux_path, torch_dtype=torch.bfloat16, cache_dir="/scratch/2025_05/jixie")
+pipe.load_lora_weights(args.lora_path, adapter_name="icedit")
+pipe.set_adapters("icedit", 1.0)
 
 if args.enable_model_cpu_offload:
     pipe.enable_model_cpu_offload()
@@ -49,7 +52,15 @@ def infer(edit_images,
           height=1024,
           guidance_scale=50,
           num_inference_steps=28,
+          lora_scale=1.0,
           progress=gr.Progress(track_tqdm=True)):
+
+    global current_lora_scale
+    
+    if lora_scale != current_lora_scale:
+        print(f"\033[93m[INFO] LoRA scale changed from {current_lora_scale} to {lora_scale}, reloading LoRA weights\033[0m")
+        pipe.set_adapters("icedit", lora_scale)
+        current_lora_scale = lora_scale
 
     image = edit_images
 
@@ -96,15 +107,12 @@ def infer(edit_images,
 
     return image, seed
 
-
-# 原有的示例
 original_examples = [
     "a tiny astronaut hatching from an egg on the moon",
     "a cat holding a sign that says hello world",
     "an anime illustration of a wiener schnitzel",
 ]
 
-# 新增的示例，将元组转换为列表
 new_examples = [
     ['assets/girl.png', 'Make her hair dark green and her clothes checked.', 304897401],
     ['assets/boy.png', 'Change the sunglasses to a Christmas hat.', 748891420],
@@ -195,21 +203,32 @@ For more details, check out our [Github Repository](https://github.com/River-Zha
                     step=1,
                     value=28,
                 )
+                
+            lora_scale = gr.Slider(
+                label="LoRA Scale",
+                minimum=0,
+                maximum=1.0,
+                step=0.01,
+                value=1.0,
+            )
 
-        # 添加 Gradio 示例组件
+        def process_example(edit_image, prompt, seed, randomize_seed):
+            result, seed_out = infer(edit_image, prompt, seed, False, 1024, 1024, 50, 28, 1.0)
+            return result, seed_out, False
+
         gr.Examples(
             examples=new_examples,
-            inputs=[edit_image, prompt, seed],
-            outputs=[result, seed],
-            fn=infer,
+            inputs=[edit_image, prompt, seed, randomize_seed],
+            outputs=[result, seed, randomize_seed],
+            fn=process_example,
             cache_examples=False
         )
 
     gr.on(
         triggers=[run_button.click, prompt.submit],
         fn=infer,
-        inputs=[edit_image, prompt, seed, randomize_seed, width, height, guidance_scale, num_inference_steps],
+        inputs=[edit_image, prompt, seed, randomize_seed, width, height, guidance_scale, num_inference_steps, lora_scale],
         outputs=[result, seed]
     )
-
+    
 demo.launch(server_port=args.port)
