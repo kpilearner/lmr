@@ -48,7 +48,7 @@
 
 - **[2025/5/8]** 🔥 We have released our **[official ComfyUI workflow](https://github.com/River-Zhang/ICEdit/tree/main/workflow_example)**! 🚀 Check the repository and have a try!
 
-- **[2025/5/8]** 🔥 We have added LoRA scale slider in the demo. You can try to discover more interesting demo with different scale! 
+- **[2025/5/8]** 🔥 We have added LoRA scale slider in the gradio demo. You can try to discover more interesting demo with different scale! 
 
 ![alt text](docs/images/lora_scale.png)
 
