@@ -35,8 +35,8 @@
 
 
 ### 📢 Attention All: Incorrect ComfyUI Workflow Usage Alert — Read Now!
-- ### We have released our **[official ComfyUI workflow](https://github.com/River-Zhang/ICEdit/tree/main/workflow_example)** for proper usage! Check our repository and have a try!
-- You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!) [Datou](https://x.com/Datou) has updated his [ComfyUI workflow](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB), have a try! (The code for the Hugging Face gradio demo already embeds this prompt. So, you can simply input the editing instructions without additional setup.)
+- ### We have released our **[official ComfyUI workflow](https://github.com/hayd-zju/ICEdit-ComfyUI-official)** for proper usage! Check our repository and have a try!
+- You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!, The code for the Hugging Face gradio demo already embeds this prompt. So, you can simply input the editing instructions without additional setup.)
 - The width of the input image must resize to **512** (no restriction to height).
 - Please **[use the Normal LoRA](https://huggingface.co/RiverZ/normal-lora/tree/main)** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
 - 🔥💐🎆 Welcome to share your **creative workflows** (such as combining Redux, ACE, etc.) in the Issues section and showcase the results! We will include references so that more people can see your creativity.
@@ -46,8 +46,8 @@
 
 ### 👑 Feel free to share your results in this [Gallery](https://github.com/River-Zhang/ICEdit/discussions/21)!
 
-- **[2025/5/9]** 🌟 Great thanks to [gluttony-10](https://github.com/River-Zhang/ICEdit/issues/23#issue-3050804566) for making a [one-click package](#-installation-on-windows) to use our project on Windows!
-- **[2025/5/8]** 🔥 We have released our **[official ComfyUI workflow](https://github.com/River-Zhang/ICEdit/tree/main/workflow_example)**! 🚀 Check the repository and have a try!
+- **[2025/5/9]** 🌟 Great thanks to [gluttony-10 (十字鱼)](https://github.com/River-Zhang/ICEdit/issues/23#issue-3050804566) for making a [one-click package](#-installation-on-windows) to use our project on Windows!
+- **[2025/5/8]** 🔥 We have released our **[official ComfyUI workflow](https://github.com/hayd-zju/ICEdit-ComfyUI-official)**! 🚀 Check the repository and have a try!
 
 - **[2025/5/8]** 🔥 We have added LoRA scale slider in the gradio demo. You can try to discover more interesting demo with different scale! 
 <div align="center">
@@ -94,10 +94,10 @@
 
 
 ### Official ComfyUI-workflow
-We have released our **official ComfyUI workflow** in this repository for correct usage of our model! **We have embedded the prompt "A diptych with two side-by-side images of the same scene ... but" into our nodes** and you just need to input the edit instructions such as "make the girl wear pink sunglasses". We also add a high resolution refinement module for better image quality! The total VRAM consumption is about 14GB. Use this [workflow](https://github.com/River-Zhang/ICEdit/tree/main/workflow_example) and the [ICEdit-normal-lora](https://huggingface.co/RiverZ/normal-lora/tree/main) to fulfill your creative ideas!
+We have released our **official ComfyUI workflow** in this repository for correct usage of our model! **We have embedded the prompt "A diptych with two side-by-side images of the same scene ... but" into our nodes** and you just need to input the edit instructions such as "make the girl wear pink sunglasses". We also add a high resolution refinement module for better image quality! The total VRAM consumption is about 14GB. Use this [workflow](https://github.com/hayd-zju/ICEdit-ComfyUI-official) and the [ICEdit-normal-lora](https://huggingface.co/RiverZ/normal-lora/tree/main) to fulfill your creative ideas!
 
-
-Here is an [issue](https://github.com/River-Zhang/ICEdit/issues/22#issuecomment-2864958908) on how to install our workflow to ComfyUI. For smaller VRAM usage please try the following fantastic workflows!
+We have specially create [a repository for the workflow](https://github.com/hayd-zju/ICEdit-ComfyUI-official) and you can install it directly in ComfyUI.
+Url: [https://github.com/hayd-zju/ICEdit-ComfyUI-official](https://github.com/hayd-zju/ICEdit-ComfyUI-official)
 
  <img src="docs/images/official_workflow.png" width="80%" style="display: block; margin: auto;">
 
