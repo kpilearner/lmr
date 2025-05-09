@@ -105,7 +105,8 @@
 ### Official ComfyUI-workflow
 We have released our **official ComfyUI workflow** in this repository for correct usage of our model! **We have embedded the prompt "A diptych with two side-by-side images of the same scene ... but" into our nodes** and you just need to input the edit instructions such as "make the girl wear pink sunglasses". We also add a high resolution refinement module for better image quality! The total VRAM consumption is about 14GB. Use this [workflow](https://github.com/River-Zhang/ICEdit/tree/main/workflow_example) and the [ICEdit-normal-lora](https://huggingface.co/RiverZ/normal-lora/tree/main) to fulfill your creative ideas!
 
-For smaller VRAM usage please try the following fantastic workflows!
+
+Here is an [issue](https://github.com/River-Zhang/ICEdit/issues/22#issuecomment-2864958908) on how to install our workflow to ComfyUI. For smaller VRAM usage please try the following fantastic workflows!
 
  <img src="docs/images/official_workflow.png" width="80%" style="display: block; margin: auto;">
 
