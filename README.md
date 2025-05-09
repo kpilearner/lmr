@@ -46,6 +46,7 @@
 
 ### 👑 Feel free to share your results in this [Gallery](https://github.com/River-Zhang/ICEdit/discussions/21)!
 
+- **[2025/5/9]** 🌟 Great thanks to [gluttony-10](https://github.com/River-Zhang/ICEdit/issues/23#issue-3050804566) for making a [one-click package](#-installation-on-windows) to use our project on Windows!
 - **[2025/5/8]** 🔥 We have released our **[official ComfyUI workflow](https://github.com/River-Zhang/ICEdit/tree/main/workflow_example)**! 🚀 Check the repository and have a try!
 
 - **[2025/5/8]** 🔥 We have added LoRA scale slider in the gradio demo. You can try to discover more interesting demo with different scale! 
