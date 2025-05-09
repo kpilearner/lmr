@@ -68,7 +68,6 @@
 - [🎆 News](#-news)
     - [👑 Feel free to share your results in this Gallery!](#-feel-free-to-share-your-results-in-this-gallery)
 - [📖 Table of Contents](#-table-of-contents)
-- [💪 To Do List](#-to-do-list)
 - [🎨ComfyUI Workflow](#comfyui-workflow)
     - [Official ComfyUI-workflow](#official-comfyui-workflow)
     - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
@@ -82,21 +81,11 @@
   - [Download pretrained weights](#download-pretrained-weights)
   - [Inference in bash (w/o VLM Inference-time Scaling)](#inference-in-bash-wo-vlm-inference-time-scaling)
   - [Inference in Gradio Demo](#inference-in-gradio-demo)
+- [💪 To Do List](#-to-do-list)
 - [💪 Comparison with Commercial Models](#-comparison-with-commercial-models)
 - [🌟 Star History](#-star-history)
 - [Bibtex](#bibtex)
 
-
-# 💪 To Do List
-
-- [x] Inference Code
-- [ ] Inference-time Scaling with VLM
-- [x] Pretrained Weights
-- [ ] More Inference Demos
-- [x] Gradio demo
-- [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and FLUX Redux. Only 4GB VRAM GPU is enough to run!)
-- [x] Comfy UI demo with normal lora (by @[Datou](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) in openart)
-- [ ] Training Code
 
 
 # 🎨ComfyUI Workflow
@@ -238,6 +227,16 @@ Here is also a Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=
 
 
 
+# 💪 To Do List
+
+- [x] Inference Code
+- [ ] Inference-time Scaling with VLM
+- [x] Pretrained Weights
+- [ ] More Inference Demos
+- [x] Gradio demo
+- [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and FLUX Redux. Only 4GB VRAM GPU is enough to run!)
+- [x] Comfy UI demo with normal lora (by @[Datou](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) in openart)
+- [ ] Training Code
 
 
 
