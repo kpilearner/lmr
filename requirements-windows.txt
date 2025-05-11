@@ -1,0 +1,14 @@
+--extra-index-url https://download.pytorch.org/whl/cu128
+accelerate
+diffusers==0.32.0
+gradio
+numpy
+peft
+protobuf
+sentencepiece
+spaces
+torch==2.7.0+cu128
+torchvision
+transformers==4.51.3
+torchao
+triton-windows
