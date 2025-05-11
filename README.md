@@ -45,6 +45,7 @@
 # 🎆 News 
 
 ### 👑 Feel free to share your results in this [Gallery](https://github.com/River-Zhang/ICEdit/discussions/21)!
+- **[2025/5/11]**  Great thanks to [gluttony-10 (十字鱼)](https://github.com/River-Zhang/ICEdit/issues/23#issue-3050804566) for making a [windows gradio demo](#inference-in-gradio-demo-on-windows) to use our project on Windows!
 - **[2025/5/10]** 🌟 Great thanks to [月下Hugo](https://www.bilibili.com/video/BV1JZVRzuE12/?share_source=copy_web&vd_source=8fcb933ee576af56337afc41509fa095) for making a [Chinese tutorial](https://www.bilibili.com/video/BV1JZVRzuE12/?share_source=copy_web&vd_source=8fcb933ee576af56337afc41509fa095) on how to use our official workflow!
 - **[2025/5/8]** 🔥 We have released our **[official ComfyUI workflow](#official-comfyui-workflow)**! 🚀 Check the repository and have a try!
 - **[2025/5/8]** 🔥 We have added LoRA scale slider in the gradio demo. You can try to discover more interesting demo with different scale! 
@@ -75,13 +76,13 @@
 - [⚠️ Tips](#️-tips)
     - [If you encounter such a failure case, please **try again with a different seed**!](#if-you-encounter-such-a-failure-case-please-try-again-with-a-different-seed)
     - [⚠️ Clarification](#️-clarification)
-- [💼 Installation on Windows](#-installation-on-windows)
 - [💼 Installation](#-installation)
   - [Conda environment setup](#conda-environment-setup)
   - [Download pretrained weights](#download-pretrained-weights)
   - [Inference in bash (w/o VLM Inference-time Scaling)](#inference-in-bash-wo-vlm-inference-time-scaling)
   - [Inference in Gradio Demo](#inference-in-gradio-demo)
-  - [Inference in Gradio Demo on Windows](#inference-in-gradio-demo-on-Windows)
+  - [Inference in Gradio Demo on Windows](#inference-in-gradio-demo-on-windows)
+  - [💼 Windows one-click package](#-windows-one-click-package)
 - [💪 To Do List](#-to-do-list)
 - [💪 Comparison with Commercial Models](#-comparison-with-commercial-models)
 - [🌟 Star History](#-star-history)
@@ -149,13 +150,6 @@ We've noticed numerous web pages related to ICEdit, including [https://icedit.ne
 However, we'd like to emphasize two important points:
 - **No Commercial Use**: Our project **cannot** be used for commercial purposes. Please check the [LICENSE](https://github.com/River-Zhang/ICEdit/blob/main/LICENSE) for details.
 - **Official Page**: The official project page is [https://river-zhang.github.io/ICEdit-gh-pages/](https://river-zhang.github.io/ICEdit-gh-pages/).
-
-# 💼 Installation on Windows
-
-Great thanks to [gluttony-10](https://github.com/River-Zhang/ICEdit/issues/23#issue-3050804566), a famous [Bilibili Up](https://space.bilibili.com/893892)! He made a tutorial ([Youtube](https://youtu.be/C-OpWlJi424) and [Bilibili](https://www.bilibili.com/video/BV1oT5uzzEbs)) on how to install our project on windows and a one-click package for Windows! **Just unzip it and it's ready to use**. It has undergone quantization processing. It only takes up 14GB of space and supports graphics cards of the 50 series.
-
-Download link: [Google Drive](https://drive.google.com/drive/folders/16j3wQvWjuzCRKnVolszLmhCtc_yOCqcx?usp=sharing) or [Baidu Wangpan](https://www.bilibili.com/video/BV1oT5uzzEbs/?vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)(refer to the comment section of the video)
-<img src="docs/images/windows_install.png" width="80%" style="display: block; margin: auto;">
 
 
 
@@ -255,6 +249,15 @@ python scripts/gradio_demo_windows.py --server_name 127.0.0.1 --port 7860 --flux
 ```
 
 Then you can open the link in your browser to edit images.
+
+
+
+## 💼 Windows one-click package
+
+Great thanks to [gluttony-10](https://github.com/River-Zhang/ICEdit/issues/23#issue-3050804566), a famous [Bilibili Up](https://space.bilibili.com/893892)! He made a tutorial ([Youtube](https://youtu.be/C-OpWlJi424) and [Bilibili](https://www.bilibili.com/video/BV1oT5uzzEbs)) on how to install our project on windows and a one-click package for Windows! **Just unzip it and it's ready to use**. It has undergone quantization processing. It only takes up 14GB of space and supports graphics cards of the 50 series.
+
+Download link: [Google Drive](https://drive.google.com/drive/folders/16j3wQvWjuzCRKnVolszLmhCtc_yOCqcx?usp=sharing) or [Baidu Wangpan](https://www.bilibili.com/video/BV1oT5uzzEbs/?vd_source=2a911c0bc75f6d9b9d056bf0e7410d45)(refer to the comment section of the video)
+<img src="docs/images/windows_install.png" width="80%" style="display: block; margin: auto;">
 
 
 # 💪 To Do List
