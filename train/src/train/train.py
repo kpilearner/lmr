@@ -76,7 +76,7 @@ def main():
     # Initialize dataset and dataloader
     
     if training_config["dataset"]["type"] == "edit":
-        dataset = load_dataset('osunlp/MagicBrush', cache_dir='/scratch/2025_04/jixie')
+        dataset = load_dataset('osunlp/MagicBrush')
         dataset = EditDataset(
             dataset,
             condition_size=training_config["dataset"]["condition_size"],
@@ -84,7 +84,7 @@ def main():
             drop_text_prob=training_config["dataset"]["drop_text_prob"],
         )
     elif training_config["dataset"]["type"] == "omini":
-        dataset = load_dataset(training_config["dataset"]["path"], cache_dir='/scratch/2025_04/jixie')
+        dataset = load_dataset(training_config["dataset"]["path"])
         dataset = OminiDataset(
             dataset,
             condition_size=training_config["dataset"]["condition_size"],
@@ -93,8 +93,8 @@ def main():
         )
 
     elif training_config["dataset"]["type"] == "edit_with_omini":
-        omni = load_dataset("parquet", data_files=os.path.abspath(training_config["dataset"]["path"]), split="train", cache_dir='/scratch/2025_04/jixie')
-        magic = load_dataset('osunlp/MagicBrush', cache_dir='/scratch/2025_04/jixie')
+        omni = load_dataset("parquet", data_files=os.path.abspath(training_config["dataset"]["path"]), split="train")
+        magic = load_dataset('osunlp/MagicBrush')
         dataset = EditDataset_with_Omini(
             magic,
             omni,

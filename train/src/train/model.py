@@ -30,7 +30,7 @@ class OminiModel(L.LightningModule):
         self.optimizer_config = optimizer_config
 
         # Load the Flux pipeline
-        self.flux_fill_pipe = FluxFillPipeline.from_pretrained(flux_fill_id, cache_dir='/scratch/2025_04/jixie').to(dtype=dtype).to(device)
+        self.flux_fill_pipe = FluxFillPipeline.from_pretrained(flux_fill_id).to(dtype=dtype).to(device)
 
         self.transformer = self.flux_fill_pipe.transformer
         self.text_encoder = self.flux_fill_pipe.text_encoder
