@@ -83,6 +83,7 @@
   - [Inference in Gradio Demo](#inference-in-gradio-demo)
   - [Inference in Gradio Demo on Windows](#inference-in-gradio-demo-on-windows)
   - [💼 Windows one-click package](#-windows-one-click-package)
+- [🔧 Training](#-training)
 - [💪 To Do List](#-to-do-list)
 - [💪 Comparison with Commercial Models](#-comparison-with-commercial-models)
 - [🌟 Star History](#-star-history)
@@ -260,6 +261,10 @@ Download link: [Google Drive](https://drive.google.com/drive/folders/16j3wQvWjuz
 <img src="docs/images/windows_install.png" width="80%" style="display: block; margin: auto;">
 
 
+# 🔧 Training
+
+Found more details in here: [Training Code](./train/)
+
 # 💪 To Do List
 
 - [x] Inference Code
@@ -270,7 +275,7 @@ Download link: [Google Drive](https://drive.google.com/drive/folders/16j3wQvWjuz
 - [x] Comfy UI demo (by @[judian17](https://github.com/River-Zhang/ICEdit/issues/1#issuecomment-2846568411), compatible with [nunchaku](https://github.com/mit-han-lab/ComfyUI-nunchaku), support high-res refinement and FLUX Redux. Only 4GB VRAM GPU is enough to run!)
 - [x] Comfy UI demo with normal lora (by @[Datou](https://openart.ai/workflows/datou/icedit-moe-lora-flux-fill/QFmaWNKsQo3P5liYz4RB) in openart)
 - [x] Official ComfyUI workflow
-- [ ] Training Code
+- [x] Training Code
 - [ ] LoRA for higher image resolution (768, 1024)
 
 
