@@ -9,7 +9,7 @@ import os
 # if workspace_dir not in sys.path:
 #     sys.path.insert(0, workspace_dir)
     
-from diffusers import FluxFillPipeline
+from diffusers import FluxFillPipeline, FluxTransformer2DModel, GGUFQuantizationConfig
 import gradio as gr
 import numpy as np
 import torch
@@ -19,21 +19,61 @@ import random
 from diffusers import FluxFillPipeline
 from PIL import Image
 
+from transformers import T5EncoderModel
+
 MAX_SEED = np.iinfo(np.int32).max
 MAX_IMAGE_SIZE = 1024
 
 current_lora_scale = 1.0
 
-
 parser = argparse.ArgumentParser() 
+parser.add_argument("--server_name", type=str, default="127.0.0.1")
 parser.add_argument("--port", type=int, default=7860, help="Port for the Gradio app")
+parser.add_argument("--share", action="store_true")
 parser.add_argument("--output-dir", type=str, default="gradio_results", help="Directory to save the output image")
 parser.add_argument("--flux-path", type=str, default='black-forest-labs/flux.1-fill-dev', help="Path to the model")
 parser.add_argument("--lora-path", type=str, default='RiverZ/normal-lora', help="Path to the LoRA weights")
+parser.add_argument("--transformer", type=str, default=None, help="The gguf model of FluxTransformer2DModel")
+parser.add_argument("--text_encoder_2", type=str, default=None, help="The gguf model of T5EncoderModel")
 parser.add_argument("--enable-model-cpu-offload", action="store_true", help="Enable CPU offloading for the model")
 args = parser.parse_args()
 
-pipe = FluxFillPipeline.from_pretrained(args.flux_path, torch_dtype=torch.bfloat16)
+if args.transformer:
+    args.transformer = os.path.abspath(args.transformer)
+    transformer = FluxTransformer2DModel.from_single_file(
+        args.transformer,
+        config="scripts/config.json",
+        quantization_config=GGUFQuantizationConfig(compute_dtype=torch.bfloat16),
+        torch_dtype=torch.bfloat16,
+    )
+else:
+    transformer = FluxTransformer2DModel.from_pretrained(
+        args.flux_path, 
+        subfolder="transformer",
+        torch_dtype=torch.bfloat16,
+    )
+
+if args.text_encoder_2:
+    args.text_encoder_2 = os.path.abspath(args.text_encoder_2)
+    text_encoder_2 = T5EncoderModel.from_pretrained(
+        args.flux_path,
+        subfolder="text_encoder_2",
+        gguf_file=f"{args.text_encoder_2}",
+        torch_dtype=torch.bfloat16,
+    )
+else:
+    text_encoder_2 = T5EncoderModel.from_pretrained(
+        args.flux_path,
+        subfolder="text_encoder_2",
+        torch_dtype=torch.bfloat16,
+    )
+
+pipe = FluxFillPipeline.from_pretrained(
+    args.flux_path, 
+    transformer=transformer, 
+    text_encoder_2=text_encoder_2, 
+    torch_dtype=torch.bfloat16
+)
 pipe.load_lora_weights(args.lora_path, adapter_name="icedit")
 pipe.set_adapters("icedit", 1.0)
 
@@ -231,4 +271,10 @@ For more details, check out our [Github Repository](https://github.com/River-Zha
         outputs=[result, seed]
     )
     
-demo.launch(server_port=args.port)
+if __name__ == "__main__": 
+    demo.launch(
+        server_name=args.server_name, 
+        server_port=args.port,
+        share=args.share, 
+        inbrowser=True,
+    )
