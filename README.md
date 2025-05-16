@@ -88,7 +88,6 @@
   - [Download pretrained weights](#download-pretrained-weights)
   - [Inference in bash (w/o VLM Inference-time Scaling)](#inference-in-bash-wo-vlm-inference-time-scaling)
   - [Inference in Gradio Demo](#inference-in-gradio-demo)
-  - [Inference in Gradio Demo on Windows](#inference-in-gradio-demo-on-windows)
   - [💼 Windows one-click package](#-windows-one-click-package)
 - [🔧 Training](#-training)
 - [💪 To Do List](#-to-do-list)
@@ -229,6 +228,17 @@ python scripts/gradio_demo.py --port 7860 \
                               --enable-model-cpu-offload (optional) \
 ```
 
+Or if you want to run the demo on a system with 10 GB of GPU memory, you can download the gguf models from [FLUX.1-Fill-dev-gguf](https://huggingface.co/YarvixPA/FLUX.1-Fill-dev-gguf), [t5-v1_1-xxl-encoder-gguf](https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf) and pass the parameters during inference, as in:
+
+```bash
+python scripts/gradio_demo.py --port 7861 \
+                              --flux-path models/flux.1-fill-dev \
+                              --lora-path models/ICEdit-normal-LoRA \
+                              --transformer models/flux1-fill-dev-Q4_0.gguf \
+                              --text_encoder_2 models/t5-v1_1-xxl-encoder-Q8_0.gguf \
+                              --enable-model-cpu-offload \
+```
+
 Then you can open the link in your browser to edit images.
 
 <div align="center">
@@ -240,25 +250,6 @@ Then you can open the link in your browser to edit images.
 <div align="left">
 
 Here is also a Chinese tutorial [Youtube video](https://www.youtube.com/watch?v=rRMc5DE4qMo) on how to install and use ICEdit, created by [softicelee2](https://github.com/softicelee2). It's definitely worth a watch!
-
-## Inference in Gradio Demo on Windows
-
-We provide a gradio demo on Windows for you to edit images in a more user-friendly way. You can run the following command to start the demo.
-
-```bash
-conda activate icedit
-pip install -r requirements-windows.txt
-```
-
-Like the inference script, if you want to run the demo on a system with 16 GB of GPU memory, you can add the `--enable-model-cpu-offload --int8` parameter. And if you have downloaded the pretrained weights locally, please pass the parameters during inference, as in:
-
-```bash
-python scripts/gradio_demo_windows.py --server_name 127.0.0.1 --port 7860 --flux-path /path/to/flux.1-fill-dev --lora-path /path/to/ICEdit-normal-LoRA --enable-model-cpu-offload --int8
-```
-
-Then you can open the link in your browser to edit images.
-
-
 
 ## 💼 Windows one-click package
 
