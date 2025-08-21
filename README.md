@@ -34,16 +34,7 @@
 <div align="left">
 
 
-### 📢 Attention All: Incorrect ComfyUI Workflow Usage Alert — Read Now!
-- ### We have released our **[official ComfyUI workflow](#official-comfyui-workflow)** for proper usage! Check our repository and have a try!
-- You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!, The code for the Hugging Face gradio demo already embeds this prompt. So, you can simply input the editing instructions without additional setup.)
-- The width of the input image must resize to **512** (no restriction to height).
-- Please **[use the Normal LoRA](https://huggingface.co/RiverZ/normal-lora/tree/main)** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
-- 🔥💐🎆 Welcome to share your **creative workflows** (such as combining Redux, ACE, etc.) in the Issues section and showcase the results! We will include references so that more people can see your creativity.
-
-
 # 🎆 News 
-
 
 ### 👑 Feel free to share your results in this [Gallery](https://github.com/River-Zhang/ICEdit/discussions/21)!
 - **[2025/8/21]** 🌟 We have released an [Ascend (Huawei NPU)-powered version of ICEdit](https://github.com/2018liuzhiyuan/ICEdit-on-Ascend-NPU). Now you can run ICEdit on Ascend NPU! Many thanks to [Zhiyuan](https://github.com/2018liuzhiyuan)！
@@ -84,6 +75,7 @@
     - [👑 Feel free to share your results in this Gallery!](#-feel-free-to-share-your-results-in-this-gallery)
 - [🎈 Tutorial on Bilibili or Youtube](#-tutorial-on-bilibili-or-youtube)
 - [📖 Table of Contents](#-table-of-contents)
+    - [📢 Attention All: Incorrect ComfyUI Workflow Usage Alert!](#-attention-all-incorrect-comfyui-workflow-usage-alert)
 - [🎨ComfyUI Workflow](#comfyui-workflow)
     - [Official ComfyUI-workflow](#official-comfyui-workflow)
     - [ComfyUI-workflow for increased editing success rate](#comfyui-workflow-for-increased-editing-success-rate)
@@ -103,6 +95,15 @@
 - [💪 Comparison with Commercial Models](#-comparison-with-commercial-models)
 - [🌟 Star History](#-star-history)
 - [Bibtex](#bibtex)
+
+
+
+### 📢 Attention All: Incorrect ComfyUI Workflow Usage Alert!
+- ### We have released our **[official ComfyUI workflow](#official-comfyui-workflow)** for proper usage! Check our repository and have a try!
+- You need to **add the fixed pre-prompt "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but {instruction}"** before inputing the edit instructions, otherwise you may get bad results! (This is mentioned in the paper!, The code for the Hugging Face gradio demo already embeds this prompt. So, you can simply input the editing instructions without additional setup.)
+- The width of the input image must resize to **512** (no restriction to height).
+- Please **[use the Normal LoRA](https://huggingface.co/RiverZ/normal-lora/tree/main)** not the MoE-LoRA, because the MoE-LoRA cannot be correctly loaded with ComfyUI lora loader.
+- 🔥💐🎆 Welcome to share your **creative workflows** (such as combining Redux, ACE, etc.) in the Issues section and showcase the results! We will include references so that more people can see your creativity.
 
 
 
