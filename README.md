@@ -308,7 +308,7 @@ Found more details in here: [Training Code](./train/)
 If this work is helpful for your research, please consider citing the following BibTeX entry.
 
 ```
-@misc{zhang2025ICEdit,
+@article{zhang2025ICEdit,
       title={In-Context Edit: Enabling Instructional Image Editing with In-Context Generation in Large Scale Diffusion Transformer}, 
       author={Zechuan Zhang and Ji Xie and Yu Lu and Zongxin Yang and Yi Yang},
       year={2025},
