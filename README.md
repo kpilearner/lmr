@@ -308,13 +308,10 @@ Found more details in here: [Training Code](./train/)
 If this work is helpful for your research, please consider citing the following BibTeX entry.
 
 ```
-@article{zhang2025ICEdit,
-      title={In-Context Edit: Enabling Instructional Image Editing with In-Context Generation in Large Scale Diffusion Transformer}, 
-      author={Zechuan Zhang and Ji Xie and Yu Lu and Zongxin Yang and Yi Yang},
-      year={2025},
-      eprint={2504.20690},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2504.20690}, 
+@article{zhang2025context,
+  title={In-context edit: Enabling instructional image editing with in-context generation in large scale diffusion transformer},
+  author={Zhang, Zechuan and Xie, Ji and Lu, Yu and Yang, Zongxin and Yang, Yi},
+  journal={arXiv preprint arXiv:2504.20690},
+  year={2025}
 }
 ```
