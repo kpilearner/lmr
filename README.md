@@ -36,7 +36,7 @@
 
 # 🎆 News 
 
-### 👑 Feel free to share your results in this [Gallery](https://github.com/River-Zhang/ICEdit/discussions/21)!
+- **[2025/9/18]** 🌟 ICEdit has been accepted by NeurIPS 2025!🎉 See you in San Diego!
 - **[2025/8/21]** 🌟 We have released an [Ascend (Huawei NPU)-powered version of ICEdit](https://github.com/2018liuzhiyuan/ICEdit-on-Ascend-NPU). Now you can run ICEdit on Ascend NPU! Many thanks to [Zhiyuan](https://github.com/2018liuzhiyuan)！
 - **[2025/5/16]** 🌟 Many thanks to [gluttony-10 (十字鱼)](https://github.com/River-Zhang/ICEdit/pull/47#issue-3067039788) for adapting Gradio demo with [GGUF quantization](#inference-in-gradio-demo), further reducing memory usage to **10GB**.
 - **[2025/5/14]** 🔥 With the help of the [official comfy-org](https://www.comfy.org/zh-cn/), we have integrated our ComfyUI nodes into [Comfy Registry](https://registry.comfy.org/nodes/ICEdit)! 
@@ -64,6 +64,7 @@
 
 # 🎈 Tutorial on Bilibili or Youtube
 
+### 👑 Feel free to share your results in this [Gallery](https://github.com/River-Zhang/ICEdit/discussions/21)!
 - **[2025/5/15]** 🌟 We find that [啦啦啦的小黄瓜](https://space.bilibili.com/219572544) has made a detailed [bilibili tutorial](https://www.bilibili.com/video/BV1tSEqzJE7q/?share_source=copy_web&vd_source=8fcb933ee576af56337afc41509fa095) introducing our model! What a great video!
 - **[2025/5/14]** 🌟 We find that [Nenly同学](https://space.bilibili.com/1814756990) has made a fantastic [bilibili tutorial](https://www.bilibili.com/video/BV1bNEvzrEn1/?share_source=copy_web&vd_source=8fcb933ee576af56337afc41509fa095) on how to use our repository! Great thanks to him!
 - **[2025/5/10]** 🌟 Great thanks to [月下Hugo](https://www.bilibili.com/video/BV1JZVRzuE12/?share_source=copy_web&vd_source=8fcb933ee576af56337afc41509fa095) for making a [Chinese tutorial](https://www.bilibili.com/video/BV1JZVRzuE12/?share_source=copy_web&vd_source=8fcb933ee576af56337afc41509fa095) on how to use our official workflow!
@@ -72,8 +73,8 @@
 # 📖 Table of Contents
 
 - [🎆 News](#-news)
-    - [👑 Feel free to share your results in this Gallery!](#-feel-free-to-share-your-results-in-this-gallery)
 - [🎈 Tutorial on Bilibili or Youtube](#-tutorial-on-bilibili-or-youtube)
+    - [👑 Feel free to share your results in this Gallery!](#-feel-free-to-share-your-results-in-this-gallery)
 - [📖 Table of Contents](#-table-of-contents)
     - [📢 Attention All: Incorrect ComfyUI Workflow Usage Alert!](#-attention-all-incorrect-comfyui-workflow-usage-alert)
 - [💼 Installation](#-installation)
