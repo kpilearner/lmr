@@ -35,7 +35,7 @@
 
 
 # 🎆 News 
-
+- **[2025/9/19]** 🔥 We have open-sourced our [MoE version ICEdit and ckpt](#for-the-usage-of-moe-lora-version). Have a try!🚀
 - **[2025/9/18]** 🌟 ICEdit has been accepted by NeurIPS 2025!🎉 See you in San Diego!
 - **[2025/8/21]** 🌟 We have released an [Ascend (Huawei NPU)-powered version of ICEdit](https://github.com/2018liuzhiyuan/ICEdit-on-Ascend-NPU). Now you can run ICEdit on Ascend NPU! Many thanks to [Zhiyuan](https://github.com/2018liuzhiyuan)！
 - **[2025/5/16]** 🌟 Many thanks to [gluttony-10 (十字鱼)](https://github.com/River-Zhang/ICEdit/pull/47#issue-3067039788) for adapting Gradio demo with [GGUF quantization](#inference-in-gradio-demo), further reducing memory usage to **10GB**.
@@ -81,6 +81,7 @@
   - [Conda environment setup](#conda-environment-setup)
   - [Download pretrained weights](#download-pretrained-weights)
   - [Inference in bash (w/o VLM Inference-time Scaling)](#inference-in-bash-wo-vlm-inference-time-scaling)
+      - [For the usage of MoE-LoRA version](#for-the-usage-of-moe-lora-version)
   - [Inference in Gradio Demo](#inference-in-gradio-demo)
   - [💼 Windows one-click package](#-windows-one-click-package)
 - [🔧 Training](#-training)
@@ -125,8 +126,9 @@ If you can connect to Huggingface, you don't need to download the weights. Other
 
 - [Flux.1-fill-dev](https://huggingface.co/black-forest-labs/flux.1-fill-dev).
 - [ICEdit-normal-LoRA](https://huggingface.co/RiverZ/normal-lora/tree/main).
+- [ICEdit-MoE-LoRA](https://huggingface.co/sanaka87/ICEdit-MoE-LoRA/tree/main)
 
-Note: Due to some cooperation permission issues, we have to withdraw the weights and codes of moe-lora temporarily. What is released currently is just the ordinary lora, but it still has powerful performance. If you urgently need the moe lora weights of the original text, please email the author.
+~~Note: Due to some cooperation permission issues, we have to withdraw the weights and codes of moe-lora temporarily. What is released currently is just the ordinary lora, but it still has powerful performance. If you urgently need the moe lora weights of the original text, please email the author.~~
 
 ## Inference in bash (w/o VLM Inference-time Scaling)
 
@@ -159,18 +161,50 @@ python scripts/inference.py --image assets/girl.png \
                             --lora-path /path/to/ICEdit-normal-LoRA
 ```
 
+#### For the usage of MoE-LoRA version
+```bash
+python scripts/inference_moe.py --image assets/girl.png \
+                            --instruction "Make her hair dark green and her clothes checked." \
+                            --seed 42 \
+```
+
+```bash
+python scripts/inference_moe.py --image assets/girl.png \
+                            --instruction "Make her hair dark green and her clothes checked." \
+                            --enable-model-cpu-offload
+```
+
+```bash
+python scripts/inference_moe.py --image assets/girl.png \
+                            --instruction "Make her hair dark green and her clothes checked." \
+                            --flux-path /path/to/flux.1-fill-dev \
+                            --lora-path /path/to/ICEdit-MoE-LoRA
+```
+
 ## Inference in Gradio Demo
 
 We provide a gradio demo for you to edit images in a more user-friendly way. You can run the following command to start the demo.
 
 ```bash
 python scripts/gradio_demo.py --port 7860
+
+
+
+## for MoE version
+python scripts/gradio_demo_moe.py --port 7860
+
 ```
 
 Like the inference script, if you want to run the demo on a system with 24 GB of GPU memory, you can add the `--enable-model-cpu-offload` parameter. And if you have downloaded the pretrained weights locally, please pass the parameters during inference, as in:
 
 ```bash
 python scripts/gradio_demo.py --port 7860 \
+                              --flux-path /path/to/flux.1-fill-dev (optional) \
+                              --lora-path /path/to/ICEdit-normal-LoRA (optional) \
+                              --enable-model-cpu-offload (optional) \
+
+## for MoE version
+python scripts/gradio_demo_moe.py --port 7860 \
                               --flux-path /path/to/flux.1-fill-dev (optional) \
                               --lora-path /path/to/ICEdit-normal-LoRA (optional) \
                               --enable-model-cpu-offload (optional) \
