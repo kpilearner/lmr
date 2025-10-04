@@ -75,6 +75,12 @@ def main():
 
     # Initialize dataset and dataloader
     
+    include_semantic = training_config["dataset"].get("include_semantic", False)
+    semantic_column = training_config["dataset"].get("semantic_column", "panoptic_img")
+    condition_type = training_config.get("condition_type", "edit")
+
+    dataset = None
+
     if training_config["dataset"]["type"] == "edit":
         dataset = load_dataset('osunlp/MagicBrush')
         dataset = EditDataset(
@@ -82,6 +88,8 @@ def main():
             condition_size=training_config["dataset"]["condition_size"],
             target_size=training_config["dataset"]["target_size"],
             drop_text_prob=training_config["dataset"]["drop_text_prob"],
+            include_semantic=include_semantic,
+            condition_type=condition_type,
         )
     elif training_config["dataset"]["type"] == "omini":
         dataset = load_dataset(training_config["dataset"]["path"])
@@ -90,6 +98,9 @@ def main():
             condition_size=training_config["dataset"]["condition_size"],
             target_size=training_config["dataset"]["target_size"],
             drop_text_prob=training_config["dataset"]["drop_text_prob"],
+            include_semantic=include_semantic,
+            semantic_column=semantic_column,
+            condition_type=condition_type,
         )
 
     elif training_config["dataset"]["type"] == "edit_with_omini":
@@ -101,8 +112,29 @@ def main():
             condition_size=training_config["dataset"]["condition_size"],
             target_size=training_config["dataset"]["target_size"],
             drop_text_prob=training_config["dataset"]["drop_text_prob"],
+            include_semantic=include_semantic,
+            semantic_column=semantic_column,
+            condition_type=condition_type,
         )
-          
+    elif training_config["dataset"]["type"] == "vis2ir_semantic":
+        base_dataset = load_dataset(
+            "parquet",
+            data_files=os.path.abspath(training_config["dataset"]["path"]),
+        )
+        dataset = OminiDataset(
+            base_dataset,
+            condition_size=training_config["dataset"]["condition_size"],
+            target_size=training_config["dataset"]["target_size"],
+            drop_text_prob=training_config["dataset"]["drop_text_prob"],
+            include_semantic=include_semantic,
+            semantic_column=semantic_column,
+            condition_type=condition_type,
+        )
+
+    if dataset is None:
+        raise ValueError(
+            f"Unsupported dataset type: {training_config['dataset']['type']}"
+        )
 
     print("Dataset length:", len(dataset))
     train_loader = DataLoader(
@@ -122,6 +154,7 @@ def main():
         model_config=config.get("model", {}),
         gradient_checkpointing=training_config.get("gradient_checkpointing", False),
         use_offset_noise=config["use_offset_noise"],
+        condition_size=training_config["dataset"]["condition_size"],
     )
 
     # Callbacks for logging and saving checkpoints

@@ -61,6 +61,53 @@ def encode_images_fill(pipeline: FluxFillPipeline, image: Tensor, mask_image: Te
     return images_tokens, masked_image_latents, images_ids
 
 
+def encode_single_image(pipeline: FluxFillPipeline, image: Tensor, dtype: torch.dtype, device: str):
+    """
+    Encode a single image without mask for semantic conditioning.
+
+    Args:
+        pipeline: FluxFillPipeline instance
+        image: Input image tensor [B, C, H, W]
+        dtype: Target dtype
+        device: Target device
+
+    Returns:
+        image_tokens: Encoded latent tokens
+        image_ids: Positional IDs for the tokens
+    """
+    # Preprocess and encode
+    image = pipeline.image_processor.preprocess(image)
+    image = image.to(device=device, dtype=dtype)
+
+    # VAE encoding
+    latents = pipeline.vae.encode(image).latent_dist.sample()
+    latents = (latents - pipeline.vae.config.shift_factor) * pipeline.vae.config.scaling_factor
+
+    # Pack latents
+    image_tokens = pipeline._pack_latents(latents, *latents.shape)
+
+    # Prepare positional IDs
+    image_ids = pipeline._prepare_latent_image_ids(
+        latents.shape[0],
+        latents.shape[2],
+        latents.shape[3],
+        device,
+        dtype,
+    )
+
+    # Handle shape mismatch (common in FLUX)
+    if image_tokens.shape[1] != image_ids.shape[0]:
+        image_ids = pipeline._prepare_latent_image_ids(
+            latents.shape[0],
+            latents.shape[2] // 2,
+            latents.shape[3] // 2,
+            device,
+            dtype,
+        )
+
+    return image_tokens, image_ids
+
+
 def prepare_text_input(pipeline: FluxPipeline, prompts, max_sequence_length=512):
     # Turn off warnings (CLIP overflow)
     logger.setLevel(logging.ERROR)

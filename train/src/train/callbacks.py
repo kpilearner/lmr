@@ -6,6 +6,7 @@ from transformers import pipeline
 import torch
 import os
 from datetime import datetime
+import torchvision.transforms as T
 
 try:
     import wandb
@@ -31,6 +32,7 @@ class TrainingCallback(L.Callback):
         )
 
         self.total_steps = 0
+        self.to_pil = T.ToPILImage()
 
     def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx):
         gradient_size = 0
@@ -83,9 +85,7 @@ class TrainingCallback(L.Callback):
                 pl_module,
                 f"{self.save_path}/{self.run_name}",
                 f"lora_{self.total_steps}",
-                batch["condition_type"][
-                    0
-                ],  # Use the condition type from the current batch
+                batch,
             )
 
     @torch.no_grad()
@@ -95,64 +95,63 @@ class TrainingCallback(L.Callback):
         pl_module,
         save_path,
         file_name,
-        condition_type,
+        batch,
     ):
-        
-        file_name = [
-            "assets/coffee.png",
-            "assets/coffee.png",
-            "assets/coffee.png",
-            "assets/coffee.png",
-            "assets/clock.jpg",
-            "assets/book.jpg",
-            "assets/monalisa.jpg",
-            "assets/oranges.jpg",
-            "assets/penguin.jpg",
-            "assets/vase.jpg",
-            "assets/room_corner.jpg",
-        ]
-        
-        test_instruction = [
-            "Make the image look like it's from an ancient Egyptian mural.",
-            'get rid of the coffee bean.',
-            'remove the cup.',
-            "Change it to look like it's in the style of an impasto painting.",
-            "Make this photo look like a comic book",
-            "Give this the look of a traditional Japanese woodblock print.",
-            'delete the woman',
-            "Change the image into a watercolor painting.",
-            "Make it black and white.",
-            "Make it pop art.",
-            'the sofa is leather, and the wall is black',
-        ]
-        
+        try:
+            image_tensor = batch["image"][0].detach().cpu()
+            mask_tensor = batch["condition"][0].detach().cpu()
+            prompt = batch["description"][0]
+            condition_type = batch["condition_type"][0]
+        except KeyError as exc:
+            print("[callback] Missing keys in batch for sampling:", exc)
+            return
+
+        prompt = str(prompt)
         pl_module.flux_fill_pipe.transformer.eval()
-        for i, name in enumerate(file_name):
-            test_image = Image.open(name)
-            combined_image = Image.new('RGB', (test_image.size[0] * 2, test_image.size[1]))
-            combined_image.paste(test_image, (0, 0))
-            combined_image.paste(test_image, (test_image.size[0], 0))
-            
-            mask = Image.new('L', combined_image.size, 0)
-            draw = ImageDraw.Draw(mask)
-            draw.rectangle([test_image.size[0], 0, test_image.size[0] * 2, test_image.size[1]], fill=255)
-            if condition_type == 'edit_n':
-                prompt_ = "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left. \n " + test_instruction[i]
-            else:
-                prompt_ = "A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but " + test_instruction[i]
-                
-            image = pl_module.flux_fill_pipe(
-                prompt=prompt_,
-                image=combined_image,
-                height=512,
-                width=1024,
-                mask_image=mask,
-                guidance_scale=50,
-                num_inference_steps=50,
-                max_sequence_length=512,
-                generator=torch.Generator("cpu").manual_seed(666)
-            ).images[0]
-            image.save(os.path.join(save_path, f'flux-fill-test-{self.total_steps}-{i}-{condition_type}.jpg'))
-        
+
+        combined_image = self.to_pil(image_tensor)
+        mask_np = mask_tensor.squeeze(0).clamp(0, 1).numpy()
+        mask_image = Image.fromarray((mask_np * 255).astype(np.uint8), mode="L")
+
+        result = pl_module.flux_fill_pipe(
+            prompt=prompt,
+            image=combined_image,
+            height=combined_image.height,
+            width=combined_image.width,
+            mask_image=mask_image,
+            guidance_scale=50,
+            num_inference_steps=50,
+            max_sequence_length=512,
+            generator=torch.Generator("cpu").manual_seed(666),
+        ).images[0]
+
+        mask_cols = np.where(mask_np.sum(axis=0) > 0)[0]
+        if mask_cols.size > 0:
+            right_start = int(mask_cols[0])
+            right_end = int(mask_cols[-1]) + 1
+        else:
+            right_start = combined_image.width // 2
+            right_end = combined_image.width
+        panel_width = max(right_end - right_start, combined_image.width // 3)
+
+        right_panel = result.crop(
+            (right_start, 0, right_start + panel_width, combined_image.height)
+        )
+
+        os.makedirs(save_path, exist_ok=True)
+        condition_str = str(condition_type)
+        result.save(
+            os.path.join(
+                save_path,
+                f"flux-fill-train-sample-{self.total_steps}-{condition_str}-full.png",
+            )
+        )
+        right_panel.save(
+            os.path.join(
+                save_path,
+                f"flux-fill-train-sample-{self.total_steps}-{condition_str}-right.png",
+            )
+        )
+
         pl_module.flux_fill_pipe.transformer.train()
         

@@ -17,6 +17,9 @@ class EditDataset_with_Omini(Dataset):
         drop_text_prob: float = 0.1,
         return_pil_image: bool = False,
         crop_the_noise: bool = True,
+        include_semantic: bool = False,
+        semantic_column: str = "semantic_img",
+        condition_type: str = "edit",
     ):
         self.dataset = [magic_dataset['train'], magic_dataset['dev'], omni_dataset]
 
@@ -33,6 +36,13 @@ class EditDataset_with_Omini(Dataset):
         self.return_pil_image = return_pil_image
         self.crop_the_noise = crop_the_noise
         self.to_tensor = T.ToTensor()
+        self.include_semantic = include_semantic
+        self.semantic_column = semantic_column
+        self.condition_type = condition_type
+        if self.include_semantic and not hasattr(omni_dataset, "column_names"):
+            raise ValueError("Semantic supervision requested but parquet dataset has no columns metadata.")
+        if self.include_semantic and self.semantic_column not in omni_dataset.column_names:
+            raise ValueError(f"{self.semantic_column} column is required when include_semantic is True")
 
     def __len__(self):
         return len(self.dataset[0]) + len(self.dataset[1]) + len(self.dataset[2])
@@ -49,6 +59,14 @@ class EditDataset_with_Omini(Dataset):
         image = self.dataset[split][idx]["source_img" if split != 2 else "src_img"]
         instruction = 'A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but ' + (self.dataset[split][idx]["instruction"] if split != 2 else random.choice(self.dataset[split][idx]["edited_prompt_list"]))
         edited_image = self.dataset[split][idx]["target_img" if split != 2 else "edited_img"]
+        semantic_image = None
+        if self.include_semantic:
+            sample = self.dataset[split][idx]
+            sample_keys = sample.keys() if hasattr(sample, "keys") else []
+            if self.semantic_column in sample_keys:
+                semantic_image = sample[self.semantic_column]
+            elif split == 2:
+                raise ValueError(f"{self.semantic_column} missing for omni sample while include_semantic is True")
      
         if self.crop_the_noise and split <= 1:
             image = image.crop((0, 0, image.width, image.height - image.height // 32))
@@ -56,31 +74,65 @@ class EditDataset_with_Omini(Dataset):
         
         image = image.resize((self.condition_size, self.condition_size)).convert("RGB")
         edited_image = edited_image.resize((self.target_size, self.target_size)).convert("RGB")
+        if self.include_semantic:
+            if semantic_image is None:
+                semantic_image = image.copy()
+            semantic_image = semantic_image.resize((self.condition_size, self.condition_size)).convert("RGB")
 
-        combined_image = Image.new('RGB', (self.condition_size * 2, self.condition_size))
-        combined_image.paste(image, (0, 0))
-        combined_image.paste(edited_image, (self.condition_size, 0))
-        
-       
-            
-        mask = Image.new('L', (self.condition_size * 2, self.condition_size), 0)
+        panels = [image, edited_image]
+        if self.include_semantic:
+            panels.append(semantic_image)
+
+        combined_width = self.condition_size * len(panels)
+        combined_image = Image.new('RGB', (combined_width, self.condition_size))
+        for panel_idx, panel_img in enumerate(panels):
+            combined_image.paste(panel_img, (panel_idx * self.condition_size, 0))
+
+        mask = Image.new('L', (combined_width, self.condition_size), 0)
         draw = ImageDraw.Draw(mask)
-        draw.rectangle([self.condition_size, 0, self.condition_size * 2, self.condition_size], fill=255)
-        
-        mask_combined_image = combined_image.copy()
-        draw = ImageDraw.Draw(mask_combined_image)
-        draw.rectangle([self.condition_size, 0, self.condition_size * 2, self.condition_size], fill=255)
-        
+        draw.rectangle([
+            self.condition_size,
+            0,
+            self.condition_size * 2,
+            self.condition_size,
+        ], fill=255)
+
+        if self.include_semantic and not getattr(self, "_debug_printed_shapes", False):
+            print(
+                "[semantic-debug] triptych size:", combined_image.size,
+                "mask size:", mask.size,
+                "panel order: [visible, target, semantic]",
+            )
+            self._debug_printed_shapes = True
+
         if random.random() < self.drop_text_prob:
             instruction = " "
 
+        if self.include_semantic:
+            if "but " in instruction:
+                suffix = instruction.split("but ", 1)[1]
+            else:
+                suffix = instruction
+            # Enhanced prompt with stronger semantic constraints
+            instruction = (
+                "A triptych image with three panels: LEFT=visible light image, MIDDLE=target infrared image, RIGHT=semantic segmentation map. "
+                f"Generate the MIDDLE infrared image that: (1) {suffix}, "
+                "(2) contains ONLY the objects/regions shown in the RIGHT semantic map, "
+                "(3) does NOT introduce any new thermal targets beyond what is defined in the segmentation map. "
+                "The thermal intensity distribution must strictly follow the semantic structure."
+            )
+
         return {
-            "image": self.to_tensor(combined_image), 
+            "image": self.to_tensor(combined_image),
             "condition": self.to_tensor(mask),
-            "condition_type": "edit",  
+            "condition_type": self.condition_type,
             "description": instruction,
             "position_delta": np.array([0, 0]),
-            **({"pil_image": [edited_image, combined_image]} if self.return_pil_image else {}),
+            **(
+                {"pil_image": [edited_image, combined_image]}
+                if self.return_pil_image
+                else {}
+            ),
         }
 
 class OminiDataset(Dataset):
@@ -92,8 +144,14 @@ class OminiDataset(Dataset):
         drop_text_prob: float = 0.1,
         return_pil_image: bool = False,
         specific_task: list = None,
+        include_semantic: bool = False,
+        semantic_column: str = "semantic_img",
+        condition_type: str = "edit",
     ):
-        self.base_dataset = base_dataset['train']
+        if isinstance(base_dataset, dict):
+            self.base_dataset = base_dataset['train']
+        else:
+            self.base_dataset = base_dataset
         if specific_task is not None:
             self.specific_task = specific_task
             task_indices = [i for i, task in enumerate(self.base_dataset['task']) if task in self.specific_task]
@@ -107,42 +165,83 @@ class OminiDataset(Dataset):
         self.target_size = target_size
         self.drop_text_prob = drop_text_prob
         self.return_pil_image = return_pil_image
-        self.to_tensor = T.ToTensor()        
+        self.to_tensor = T.ToTensor()
+        self.include_semantic = include_semantic
+        self.semantic_column = semantic_column
+        self.condition_type = condition_type
+        if self.include_semantic and self.semantic_column not in getattr(self.base_dataset, "column_names", []):
+            raise ValueError(f"{self.semantic_column} column is required when include_semantic is True")
 
     def __len__(self):
         return len(self.base_dataset)
 
     def __getitem__(self, idx):
-        image = self.base_dataset[idx]["src_img"]
-        instruction = 'A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but ' + random.choice(self.base_dataset[idx]["edited_prompt_list"])
-            
-        edited_image = self.base_dataset[idx]["edited_img"]
-        
+        sample = self.base_dataset[idx]
+        image = sample["src_img"]
+        instruction = 'A diptych with two side-by-side images of the same scene. On the right, the scene is exactly the same as on the left but ' + random.choice(sample["edited_prompt_list"])
+        edited_image = sample["edited_img"]
+        semantic_image = None
+        if self.include_semantic:
+            semantic_image = sample[self.semantic_column]
+
         image = image.resize((self.condition_size, self.condition_size)).convert("RGB")
         edited_image = edited_image.resize((self.target_size, self.target_size)).convert("RGB")
+        if self.include_semantic:
+            semantic_image = semantic_image.resize((self.condition_size, self.condition_size)).convert("RGB")
 
-        combined_image = Image.new('RGB', (self.condition_size * 2, self.condition_size))
-        combined_image.paste(image, (0, 0))
-        combined_image.paste(edited_image, (self.condition_size, 0))
-        
-        mask = Image.new('L', (self.condition_size * 2, self.condition_size), 0)
+        panels = [image, edited_image]
+        if self.include_semantic:
+            panels.append(semantic_image)
+
+        combined_width = self.condition_size * len(panels)
+        combined_image = Image.new('RGB', (combined_width, self.condition_size))
+        for panel_idx, panel_img in enumerate(panels):
+            combined_image.paste(panel_img, (panel_idx * self.condition_size, 0))
+
+        mask = Image.new('L', (combined_width, self.condition_size), 0)
         draw = ImageDraw.Draw(mask)
-        draw.rectangle([self.condition_size, 0, self.condition_size * 2, self.condition_size], fill=255)
-        
-        mask_combined_image = combined_image.copy()
-        draw = ImageDraw.Draw(mask_combined_image)
-        draw.rectangle([self.condition_size, 0, self.condition_size * 2, self.condition_size], fill=255)
+        draw.rectangle([
+            self.condition_size,
+            0,
+            self.condition_size * 2,
+            self.condition_size,
+        ], fill=255)
+
+        if self.include_semantic and not getattr(self, "_debug_printed_shapes", False):
+            print(
+                "[semantic-debug] triptych size:", combined_image.size,
+                "mask size:", mask.size,
+            )
+            self._debug_printed_shapes = True
         
         if random.random() < self.drop_text_prob:
             instruction = ""
 
+        if self.include_semantic:
+            if "but " in instruction:
+                suffix = instruction.split("but ", 1)[1]
+            else:
+                suffix = instruction
+            # Enhanced prompt with stronger semantic constraints
+            instruction = (
+                "A triptych image with three panels: LEFT=visible light image, MIDDLE=target infrared image, RIGHT=semantic segmentation map. "
+                f"Generate the MIDDLE infrared image that: (1) {suffix}, "
+                "(2) contains ONLY the objects/regions shown in the RIGHT semantic map, "
+                "(3) does NOT introduce any new thermal targets beyond what is defined in the segmentation map. "
+                "The thermal intensity distribution must strictly follow the semantic structure."
+            )
+
         return {
             "image": self.to_tensor(combined_image),
             "condition": self.to_tensor(mask),
-            "condition_type": "edit", 
+            "condition_type": self.condition_type,
             "description": instruction,
             "position_delta": np.array([0, 0]),
-            **({"pil_image": [edited_image, combined_image]} if self.return_pil_image else {}),
+            **(
+                {"pil_image": [edited_image, combined_image]}
+                if self.return_pil_image
+                else {}
+            ),
         }
 
 
@@ -155,6 +254,8 @@ class EditDataset_mask(Dataset):
         drop_text_prob: float = 0.1,
         return_pil_image: bool = False,
         crop_the_noise: bool = True,
+        include_semantic: bool = False,
+        condition_type: str = "edit",
     ):
         print('THIS IS MAGICBRUSH!')
         self.base_dataset = base_dataset
@@ -164,6 +265,10 @@ class EditDataset_mask(Dataset):
         self.return_pil_image = return_pil_image
         self.crop_the_noise = crop_the_noise
         self.to_tensor = T.ToTensor()
+        self.include_semantic = include_semantic
+        self.condition_type = condition_type
+        if self.include_semantic:
+            raise ValueError("Semantic supervision is not supported for MagicBrush dataset")
 
     def __len__(self):
         return len(self.base_dataset['train']) + len(self.base_dataset['dev'])
@@ -207,7 +312,7 @@ class EditDataset_mask(Dataset):
         combined_image = Image.new('RGB', (self.condition_size * 2, self.condition_size))
         combined_image.paste(image, (0, 0))
         combined_image.paste(edited_image, (self.condition_size, 0))
-        
+
         mask = Image.new('L', (self.condition_size * 2, self.condition_size), 0)
         draw = ImageDraw.Draw(mask)
         draw.rectangle([self.condition_size, 0, self.condition_size * 2, self.condition_size], fill=255)
@@ -236,6 +341,8 @@ class EditDataset(Dataset):
         drop_text_prob: float = 0.1,
         return_pil_image: bool = False,
         crop_the_noise: bool = True,
+        include_semantic: bool = False,
+        condition_type: str = "edit",
     ):
         print('THIS IS MAGICBRUSH!')
         self.base_dataset = base_dataset
@@ -245,6 +352,10 @@ class EditDataset(Dataset):
         self.return_pil_image = return_pil_image
         self.crop_the_noise = crop_the_noise
         self.to_tensor = T.ToTensor()
+        self.include_semantic = include_semantic
+        self.condition_type = condition_type
+        if self.include_semantic:
+            raise ValueError("Semantic supervision is not supported for MagicBrush dataset")
 
     def __len__(self):
         return len(self.base_dataset['train']) + len(self.base_dataset['dev'])
@@ -294,17 +405,13 @@ class EditDataset(Dataset):
         draw = ImageDraw.Draw(mask)
         draw.rectangle([self.condition_size, 0, self.condition_size * 2, self.condition_size], fill=255)
         
-        mask_combined_image = combined_image.copy()
-        draw = ImageDraw.Draw(mask_combined_image)
-        draw.rectangle([self.condition_size, 0, self.condition_size * 2, self.condition_size], fill=255)
-        
         if random.random() < self.drop_text_prob:
             instruction = " "
 
         return {
             "image": self.to_tensor(combined_image), 
             "condition": self.to_tensor(mask),
-            "condition_type": "edit",
+            "condition_type": self.condition_type, 
             "description": instruction, 
             "position_delta": np.array([0, 0]),
             **({"pil_image": [edited_image, combined_image]} if self.return_pil_image else {}),

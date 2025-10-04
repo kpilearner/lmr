@@ -1,0 +1,103 @@
+# 🔧 修正版配置文件 - 解决维度不匹配问题
+
+flux_path: "/root/autodl-tmp/qyt/hfd_model"
+dtype: "bfloat16"
+
+model:
+  union_cond_attn: true
+  add_cond_attn: false
+  latent_lora: false
+  use_sep: false
+
+  # ========================================
+  # 🔧 修正后的语义条件配置
+  # ========================================
+  use_semantic_conditioning: true
+
+  # 🔧 重要: fusion方法只能使用以下三种 (concat已废弃)
+  # - weighted: 固定权重的特征融合 (最简单,推荐新手)
+  # - learnable_weighted: 可学习权重融合 (推荐,效果最好)
+  # - pixel_fusion: 像素级融合后再编码 (备选)
+  semantic_fusion_method: "learnable_weighted"  # 🔧 推荐使用此模式
+
+  # 权重参数 (仅weighted和pixel_fusion模式需要)
+  semantic_weight: 0.5  # 范围 [0, 1], 0=只用可见光, 1=只用语义
+
+  # 🔧 新增: 残差融合选项 (仅weighted模式)
+  use_residual_fusion: true  # 保留更多可见光信息,减少信息损失
+
+train:
+  batch_size: 4
+  accumulate_grad_batches: 1
+  dataloader_workers: 4
+  save_interval: 1000
+  sample_interval: 1000
+  max_steps: -1
+  gradient_checkpointing: true
+  save_path: "runs"
+
+  condition_type: "vis2ir_semantic"
+  dataset:
+    type: "vis2ir_semantic"
+    path: "/root/autodl-tmp/qyt_1/dataset/pid_llvip_dataset.parquet"
+    condition_size: 512
+    target_size: 512
+    image_size: 512
+    padding: 8
+    drop_text_prob: 0.1
+    drop_image_prob: 0.0
+    include_semantic: true
+    semantic_column: panoptic_img
+
+  wandb:
+    project: "Vis2IR-Semantic-Corrected"
+
+  lora_config:
+    r: 32
+    lora_alpha: 32
+    init_lora_weights: "gaussian"
+    target_modules: "(.*x_embedder|.*(?<!single_)transformer_blocks\\.[0-9]+\\.norm1\\.linear|.*(?<!single_)transformer_blocks\\.[0-9]+\\.attn\\.to_k|.*(?<!single_)transformer_blocks\\.[0-9]+\\.attn\\.to_q|.*(?<!single_)transformer_blocks\\.[0-9]+\\.attn\\.to_v|.*(?<!single_)transformer_blocks\\.[0-9]+\\.attn\\.to_out\\.0|.*(?<!single_)transformer_blocks\\.[0-9]+\\.ff\\.net\\.2|.*single_transformer_blocks\\.[0-9]+\\.norm\\.linear|.*single_transformer_blocks\\.[0-9]+\\.proj_mlp|.*single_transformer_blocks\\.[0-9]+\\.proj_out|.*single_transformer_blocks\\.[0-9]+\\.attn.to_k|.*single_transformer_blocks\\.[0-9]+\\.attn.to_q|.*single_transformer_blocks\\.[0-9]+\\.attn.to_v|.*single_transformer_blocks\\.[0-9]+\\.attn.to_out)"
+
+  optimizer:
+    type: "Prodigy"
+    params:
+      lr: 1
+      use_bias_correction: true
+      safeguard_warmup: true
+      weight_decay: 0.01
+
+
+# ========================================
+# 🔧 配置说明
+# ========================================
+#
+# 1. semantic_fusion_method 对比:
+#
+#    weighted (固定权重):
+#      - 最简单,无额外参数
+#      - 需要手动调semantic_weight
+#      - 推荐范围: 0.3-0.7
+#
+#    learnable_weighted (可学习权重):  ⭐ 推荐
+#      - 自动学习最优融合比例
+#      - 无需手动调参
+#      - 训练稳定,效果最好
+#
+#    pixel_fusion (像素级融合):
+#      - 在RGB空间融合再编码
+#      - 显存友好
+#      - 可能损失部分细节
+#
+# 2. use_residual_fusion:
+#    true:  x_cond = vis + α*(sem - vis)  # 保留可见光基础
+#    false: x_cond = (1-α)*vis + α*sem    # 标准加权
+#
+# 3. 显存占用 (batch_size=4):
+#    - weighted/learnable: ~20GB
+#    - pixel_fusion: ~18GB
+#
+# 4. 推荐训练步数:
+#    - 快速验证: 500 steps
+#    - 完整训练: 5000-10000 steps
+#
+# ========================================
