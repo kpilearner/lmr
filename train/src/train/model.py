@@ -190,15 +190,26 @@ class OminiModel(L.LightningModule):
                 # This matches the baseline diptych format exactly!
                 enhanced_diptych = torch.cat([enhanced_visible, target_img], dim=-1)
 
+                # Create correct mask for diptych (not triptych!)
+                # Mask should mark the right half (target_ir region) of the diptych
+                batch_size = enhanced_diptych.shape[0]
+                mask_diptych = torch.zeros(
+                    (batch_size, 1, self.condition_size, self.condition_size * 2),
+                    dtype=enhanced_diptych.dtype,
+                    device=enhanced_diptych.device
+                )
+                # Mark right half as 1 (to be inpainted)
+                mask_diptych[:, :, :, self.condition_size:] = 1.0
+
                 if debug_shapes:
                     print(f"[DEBUG] enhanced_diptych shape: {enhanced_diptych.shape}")
-                    print(f"[DEBUG] mask_imgs shape: {mask_imgs.shape}")
+                    print(f"[DEBUG] mask_diptych shape (corrected): {mask_diptych.shape}")
 
                 # Use standard encode_images_fill (same as baseline)
                 x_0, x_cond, img_ids = encode_images_fill(
                     self.flux_fill_pipe,
                     enhanced_diptych,
-                    mask_imgs,
+                    mask_diptych,  # Use corrected mask!
                     prompt_embeds.dtype,
                     prompt_embeds.device
                 )

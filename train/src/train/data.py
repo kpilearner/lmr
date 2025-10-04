@@ -113,13 +113,9 @@ class EditDataset_with_Omini(Dataset):
                 suffix = instruction.split("but ", 1)[1]
             else:
                 suffix = instruction
-            # Enhanced prompt with stronger semantic constraints
+            # Simplified prompt (avoid CLIP 77 token limit)
             instruction = (
-                "A triptych image with three panels: LEFT=visible light image, MIDDLE=target infrared image, RIGHT=semantic segmentation map. "
-                f"Generate the MIDDLE infrared image that: (1) {suffix}, "
-                "(2) contains ONLY the objects/regions shown in the RIGHT semantic map, "
-                "(3) does NOT introduce any new thermal targets beyond what is defined in the segmentation map. "
-                "The thermal intensity distribution must strictly follow the semantic structure."
+                f"Infrared image: {suffix}. Follow semantic map strictly, no extra targets."
             )
 
         return {
@@ -222,13 +218,9 @@ class OminiDataset(Dataset):
                 suffix = instruction.split("but ", 1)[1]
             else:
                 suffix = instruction
-            # Enhanced prompt with stronger semantic constraints
+            # Simplified prompt (avoid CLIP 77 token limit)
             instruction = (
-                "A triptych image with three panels: LEFT=visible light image, MIDDLE=target infrared image, RIGHT=semantic segmentation map. "
-                f"Generate the MIDDLE infrared image that: (1) {suffix}, "
-                "(2) contains ONLY the objects/regions shown in the RIGHT semantic map, "
-                "(3) does NOT introduce any new thermal targets beyond what is defined in the segmentation map. "
-                "The thermal intensity distribution must strictly follow the semantic structure."
+                f"Infrared image: {suffix}. Follow semantic map strictly, no extra targets."
             )
 
         return {
