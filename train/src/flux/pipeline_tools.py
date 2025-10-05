@@ -35,7 +35,6 @@ def encode_images(pipeline: FluxPipeline, images: Tensor):
 def encode_images_fill(pipeline: FluxFillPipeline, image: Tensor, mask_image: Tensor, dtype: torch.dtype, device: str):
     images_tokens, images_ids = encode_images(pipeline, image.clone().detach())
     height, width = image.shape[-2:]
-    # print(f"height: {height}, width: {width}")
     image = pipeline.image_processor.preprocess(image, height=height, width=width)
     mask_image = pipeline.mask_processor.preprocess(mask_image, height=height, width=width)
 

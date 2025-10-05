@@ -9,6 +9,7 @@ import prodigyopt
 from ..flux.transformer import tranformer_forward
 from ..flux.condition import Condition
 from ..flux.pipeline_tools import encode_images, encode_images_fill, prepare_text_input
+from ..flux.semantic_cross_attention import SemanticConditioningAdapter
 
 
 class OminiModel(L.LightningModule):
@@ -51,20 +52,38 @@ class OminiModel(L.LightningModule):
 
         # Initialize semantic conditioning
         use_semantic = self.model_config.get('use_semantic_conditioning', False)
-        if use_semantic:
-            fusion_method = self.model_config.get('semantic_fusion_method', 'fixed')
-            print(f'[INFO] Semantic conditioning ENABLED')
-            print(f'[INFO] Fusion method: {fusion_method}')
+        self.semantic_cross_attn = None
 
-            if fusion_method == 'learnable':
-                # Learnable weight (initialized at 0.5)
-                self.semantic_weight = nn.Parameter(torch.tensor(0.5, dtype=dtype))
-                print(f'[INFO] Using LEARNABLE semantic weight (init=0.5)')
-            elif fusion_method == 'fixed':
-                alpha = self.model_config.get('semantic_weight', 0.5)
-                print(f'[INFO] Using FIXED semantic weight: {alpha}')
+        if use_semantic:
+            semantic_mode = self.model_config.get('semantic_mode', 'cross_attention')
+            print(f'[INFO] Semantic conditioning ENABLED')
+            print(f'[INFO] Semantic mode: {semantic_mode}')
+
+            if semantic_mode == 'cross_attention':
+                # Cross-attention based semantic injection
+                num_layers = self.model_config.get('semantic_num_layers', 1)
+                num_heads = self.model_config.get('semantic_num_heads', 8)
+
+                # FLUX uses 64-dim packed latents
+                self.semantic_cross_attn = SemanticConditioningAdapter(
+                    dim=64,
+                    num_layers=num_layers,
+                    num_heads=num_heads,
+                    dropout=0.0
+                )
+                print(f'[INFO] Using Cross-Attention with {num_layers} layers, {num_heads} heads')
+
+            elif semantic_mode == 'pixel_fusion':
+                # Legacy pixel-level fusion (for comparison)
+                fusion_method = self.model_config.get('semantic_fusion_method', 'fixed')
+                if fusion_method == 'learnable':
+                    self.semantic_weight = nn.Parameter(torch.tensor(0.5, dtype=dtype))
+                    print(f'[INFO] Using LEARNABLE pixel fusion weight (init=0.5)')
+                elif fusion_method == 'fixed':
+                    alpha = self.model_config.get('semantic_weight', 0.5)
+                    print(f'[INFO] Using FIXED pixel fusion weight: {alpha}')
             else:
-                raise ValueError(f'Unknown semantic_fusion_method: {fusion_method}. Use "learnable" or "fixed".')
+                raise ValueError(f'Unknown semantic_mode: {semantic_mode}. Use "cross_attention" or "pixel_fusion".')
 
         self.lora_layers = self.init_lora(lora_path, lora_config)
 
@@ -101,7 +120,12 @@ class OminiModel(L.LightningModule):
         # Set the trainable parameters
         self.trainable_params = list(self.lora_layers)
 
-        # Add learnable semantic weight to optimizer if exists
+        # Add semantic cross-attention parameters if exists
+        if self.semantic_cross_attn is not None:
+            self.trainable_params.extend(list(self.semantic_cross_attn.parameters()))
+            print(f'[INFO] Added {sum(p.numel() for p in self.semantic_cross_attn.parameters())} semantic cross-attention parameters to optimizer')
+
+        # Add learnable semantic weight to optimizer if exists (for pixel fusion mode)
         if hasattr(self, 'semantic_weight'):
             self.trainable_params.append(self.semantic_weight)
             print('[INFO] Added semantic_weight to optimizer')
@@ -143,98 +167,96 @@ class OminiModel(L.LightningModule):
 
         # Check if semantic conditioning is enabled
         use_semantic = self.model_config.get('use_semantic_conditioning', False)
+        semantic_mode = self.model_config.get('semantic_mode', 'cross_attention')
+        semantic_tokens = None
+        semantic_img = None  # Store semantic image for later encoding
 
-        # Debug flag: print shapes only for first few batches
-        debug_shapes = not hasattr(self, '_debug_printed') or self.global_step < 3
-        if debug_shapes and not hasattr(self, '_debug_printed'):
-            self._debug_printed = True
+        # Debug flag for first few steps
+        debug = not hasattr(self, '_debug_done') or self.global_step < 2
+        if debug and not hasattr(self, '_debug_done'):
+            self._debug_done = True
 
         with torch.no_grad():
             prompt_embeds, pooled_prompt_embeds, text_ids = prepare_text_input(
                 self.flux_fill_pipe, prompts
             )
 
-            # Semantic conditioning: fuse in pixel space, then construct diptych
+            # Process input based on semantic mode
             if use_semantic and imgs.shape[-1] == self.condition_size * 3:
-                if debug_shapes:
-                    print(f"\n[DEBUG] ===== Semantic Conditioning =====")
-                    print(f"[DEBUG] Input triptych shape: {imgs.shape}")
-
                 # Split triptych: [visible | target_ir | semantic]
                 visible_img = imgs[:, :, :, :self.condition_size]
                 target_img = imgs[:, :, :, self.condition_size:self.condition_size*2]
                 semantic_img = imgs[:, :, :, self.condition_size*2:self.condition_size*3]
 
-                if debug_shapes:
-                    print(f"[DEBUG] visible_img shape: {visible_img.shape}")
-                    print(f"[DEBUG] target_img shape: {target_img.shape}")
-                    print(f"[DEBUG] semantic_img shape: {semantic_img.shape}")
+                if semantic_mode == 'cross_attention':
+                    # Cross-attention mode: encode diptych, store semantic for later
+                    if debug:
+                        print(f"\n[DEBUG] ===== Cross-Attention Semantic Mode =====")
+                        print(f"[DEBUG] visible_img: {visible_img.shape}")
+                        print(f"[DEBUG] target_img: {target_img.shape}")
+                        print(f"[DEBUG] semantic_img: {semantic_img.shape}")
 
-                # Get fusion weight
-                if hasattr(self, 'semantic_weight'):
-                    alpha = torch.sigmoid(self.semantic_weight)
-                    if debug_shapes:
-                        print(f"[DEBUG] Using learnable alpha: {alpha.item():.4f}")
-                else:
-                    alpha = self.model_config.get('semantic_weight', 0.5)
-                    if debug_shapes:
-                        print(f"[DEBUG] Using fixed alpha: {alpha}")
+                    # Encode visible+target as diptych
+                    diptych = torch.cat([visible_img, target_img], dim=-1)
+                    batch_size = diptych.shape[0]
+                    mask_diptych = torch.zeros(
+                        (batch_size, 1, self.condition_size, self.condition_size * 2),
+                        dtype=diptych.dtype,
+                        device=diptych.device
+                    )
+                    mask_diptych[:, :, :, self.condition_size:] = 1.0
 
-                # Fuse visible and semantic at pixel level
-                enhanced_visible = (1 - alpha) * visible_img + alpha * semantic_img
+                    if debug:
+                        print(f"[DEBUG] diptych: {diptych.shape}")
+                        print(f"[DEBUG] mask_diptych: {mask_diptych.shape}")
 
-                if debug_shapes:
-                    print(f"[DEBUG] enhanced_visible shape: {enhanced_visible.shape}")
+                    x_0, x_cond, img_ids = encode_images_fill(
+                        self.flux_fill_pipe,
+                        diptych,
+                        mask_diptych,
+                        prompt_embeds.dtype,
+                        prompt_embeds.device
+                    )
 
-                # Construct enhanced diptych: [enhanced_visible | target_ir]
-                # This matches the baseline diptych format exactly!
-                enhanced_diptych = torch.cat([enhanced_visible, target_img], dim=-1)
+                    if debug:
+                        print(f"[DEBUG] x_0: {x_0.shape}")
+                        print(f"[DEBUG] x_cond: {x_cond.shape}")
 
-                # Create correct mask for diptych (not triptych!)
-                # Mask should mark the right half (target_ir region) of the diptych
-                batch_size = enhanced_diptych.shape[0]
-                mask_diptych = torch.zeros(
-                    (batch_size, 1, self.condition_size, self.condition_size * 2),
-                    dtype=enhanced_diptych.dtype,
-                    device=enhanced_diptych.device
-                )
-                # Mark right half as 1 (to be inpainted)
-                mask_diptych[:, :, :, self.condition_size:] = 1.0
+                    # Semantic will be encoded outside no_grad to allow gradient flow
+                    # semantic_img is already set above
 
-                if debug_shapes:
-                    print(f"[DEBUG] enhanced_diptych shape: {enhanced_diptych.shape}")
-                    print(f"[DEBUG] mask_diptych shape (corrected): {mask_diptych.shape}")
+                elif semantic_mode == 'pixel_fusion':
+                    # Legacy pixel fusion mode
+                    if hasattr(self, 'semantic_weight'):
+                        alpha = torch.sigmoid(self.semantic_weight)
+                    else:
+                        alpha = self.model_config.get('semantic_weight', 0.5)
 
-                # Use standard encode_images_fill (same as baseline)
-                x_0, x_cond, img_ids = encode_images_fill(
-                    self.flux_fill_pipe,
-                    enhanced_diptych,
-                    mask_diptych,  # Use corrected mask!
-                    prompt_embeds.dtype,
-                    prompt_embeds.device
-                )
+                    enhanced_visible = (1 - alpha) * visible_img + alpha * semantic_img
+                    enhanced_diptych = torch.cat([enhanced_visible, target_img], dim=-1)
 
-                if debug_shapes:
-                    print(f"[DEBUG] After encode_images_fill:")
-                    print(f"[DEBUG]   x_0 shape: {x_0.shape}")
-                    print(f"[DEBUG]   x_cond shape: {x_cond.shape}")
-                    print(f"[DEBUG]   img_ids shape: {img_ids.shape}")
+                    batch_size = enhanced_diptych.shape[0]
+                    mask_diptych = torch.zeros(
+                        (batch_size, 1, self.condition_size, self.condition_size * 2),
+                        dtype=enhanced_diptych.dtype,
+                        device=enhanced_diptych.device
+                    )
+                    mask_diptych[:, :, :, self.condition_size:] = 1.0
+
+                    x_0, x_cond, img_ids = encode_images_fill(
+                        self.flux_fill_pipe,
+                        enhanced_diptych,
+                        mask_diptych,
+                        prompt_embeds.dtype,
+                        prompt_embeds.device
+                    )
 
             else:
-                # Standard diptych processing (backward compatible)
-                if debug_shapes:
-                    print(f"\n[DEBUG] ===== Standard Diptych =====")
-                    print(f"[DEBUG] Input diptych shape: {imgs.shape}")
-
+                # Standard diptych processing (no semantic)
                 x_0, x_cond, img_ids = encode_images_fill(
                     self.flux_fill_pipe, imgs, mask_imgs,
                     prompt_embeds.dtype, prompt_embeds.device
                 )
-
-                if debug_shapes:
-                    print(f"[DEBUG] After encode_images_fill:")
-                    print(f"[DEBUG]   x_0 shape: {x_0.shape}")
-                    print(f"[DEBUG]   x_cond shape: {x_cond.shape}")
 
             # Prepare t and x_t
             t = torch.sigmoid(torch.randn((imgs.shape[0],), device=self.device))
@@ -246,9 +268,6 @@ class OminiModel(L.LightningModule):
             t_ = t.unsqueeze(1).unsqueeze(1)
             x_t = ((1 - t_) * x_0 + t_ * x_1).to(self.dtype)
 
-            if debug_shapes:
-                print(f"[DEBUG] x_t shape: {x_t.shape}")
-
             # Prepare guidance
             guidance = (
                 torch.ones_like(t).to(self.device)
@@ -256,15 +275,42 @@ class OminiModel(L.LightningModule):
                 else None
             )
 
-        # Forward pass
-        hidden_states_input = torch.cat((x_t, x_cond), dim=2)
+        # Encode semantic image OUTSIDE no_grad for cross-attention
+        # This allows gradients to flow through cross-attention
+        if semantic_mode == 'cross_attention' and semantic_img is not None:
+            with torch.no_grad():
+                # VAE is frozen, so no_grad here
+                semantic_tokens, _ = encode_images(self.flux_fill_pipe, semantic_img)
 
-        if debug_shapes:
-            print(f"[DEBUG] hidden_states (cat of x_t and x_cond) shape: {hidden_states_input.shape}")
-            print(f"[DEBUG] ===================================\n")
+            if debug:
+                print(f"[DEBUG] semantic_tokens (encoded outside no_grad): {semantic_tokens.shape}")
+
+        # Forward pass
+        hidden_states = torch.cat((x_t, x_cond), dim=2)
+
+        # Apply semantic cross-attention if available
+        if self.semantic_cross_attn is not None and semantic_tokens is not None:
+            # Inject semantic guidance via cross-attention
+            # hidden_states: [B, 2048, 384], semantic_tokens: [B, 2048, 64]
+            # We need to apply cross-attn to the x_t part (first 64 dims)
+            if debug:
+                print(f"\n[DEBUG] Applying semantic cross-attention:")
+                print(f"[DEBUG] x_t: {x_t.shape}")
+                print(f"[DEBUG] semantic_tokens: {semantic_tokens.shape}")
+                # Check scale parameter
+                for i, layer in enumerate(self.semantic_cross_attn.layers):
+                    print(f"[DEBUG] Layer {i} scale: {layer.scale.item():.6f}")
+
+            x_t_enhanced = self.semantic_cross_attn(x_t, semantic_tokens)
+            hidden_states = torch.cat((x_t_enhanced, x_cond), dim=2)
+
+            if debug:
+                print(f"[DEBUG] x_t_enhanced: {x_t_enhanced.shape}")
+                print(f"[DEBUG] hidden_states (final): {hidden_states.shape}")
+                print(f"[DEBUG] ==========================================\n")
 
         transformer_out = self.transformer(
-            hidden_states=hidden_states_input,
+            hidden_states=hidden_states,
             timestep=t,
             guidance=guidance,
             pooled_projections=pooled_prompt_embeds,

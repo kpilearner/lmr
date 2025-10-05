@@ -71,12 +71,16 @@ class EditDataset_with_Omini(Dataset):
         if self.crop_the_noise and split <= 1:
             image = image.crop((0, 0, image.width, image.height - image.height // 32))
             edited_image = edited_image.crop((0, 0, edited_image.width, edited_image.height - edited_image.height // 32))
-        
+            # CRITICAL FIX: Also crop semantic image to match!
+            if self.include_semantic and semantic_image is not None:
+                semantic_image = semantic_image.crop((0, 0, semantic_image.width, semantic_image.height - semantic_image.height // 32))
+
         image = image.resize((self.condition_size, self.condition_size)).convert("RGB")
         edited_image = edited_image.resize((self.target_size, self.target_size)).convert("RGB")
         if self.include_semantic:
             if semantic_image is None:
                 semantic_image = image.copy()
+            # Ensure semantic image is resized to same dimensions
             semantic_image = semantic_image.resize((self.condition_size, self.condition_size)).convert("RGB")
 
         panels = [image, edited_image]
@@ -183,6 +187,8 @@ class OminiDataset(Dataset):
         image = image.resize((self.condition_size, self.condition_size)).convert("RGB")
         edited_image = edited_image.resize((self.target_size, self.target_size)).convert("RGB")
         if self.include_semantic:
+            if semantic_image is None:
+                semantic_image = image.copy()
             semantic_image = semantic_image.resize((self.condition_size, self.condition_size)).convert("RGB")
 
         panels = [image, edited_image]
